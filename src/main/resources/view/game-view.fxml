@@ -4,13 +4,17 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ucsal.sergiolj.criptexclientjfx.GameController">
-   <children>
-      <Label layoutX="133.0" layoutY="163.0" text="Bem vindo ao jogo">
+<VBox fx:id="vb_main" prefHeight="200.0" prefWidth="100.0"
+      xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
+fx:controller="br.edu.ucsal.sergiolj.criptexclientjfx.GameController">
+      <Label text="Criptex" textAlignment="CENTER">
          <font>
-            <Font size="40.0" />
-         </font>
-      </Label>
-   </children>
-</AnchorPane>
+            <Font size="23.0" />
+         </font></Label>
+      <GridPane fx:id="gp_attempts" gridLinesVisible="true">
+
+      </GridPane>
+
+      <VBox fx:id="vb_keyboard">
+      </VBox>
+</VBox>
