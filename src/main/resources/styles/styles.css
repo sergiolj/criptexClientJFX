@@ -1,31 +1,37 @@
-/* Seleciona todos os componentes que tem essa classe */
-.numeric-key{
-    -fx-font-family: "Segoe UI", Arial, sans-serif;
-    -fx-font-size: 15px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #333333; /* Cor do texto */
+.cell-base{
+    -fx-min-width: 60px;
+    -fx-min-height: 60px;
+    -fx-max-width: 60px;
+    -fx-max-height: 60px;
+    -fx-alignment: center;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+}
+.empty{
+    -fx-background-color: transparent;
+    -fx-border-color: #d3d6da;
+    -fx-border-width: 2;
+}
+.right{
+    -fx-background-color: transparent;
+    -fx-border-color: #91e494;
 }
 
-.operation-key{
-    -fx-font-family: "Segoe UI", Arial, sans-serif;
-    -fx-font-size: 24px;
-    -fx-font-weight: bold;
-    -fx-background-color: #ff6363;
-    -fx-text-fill: #ffffff;
+.wrong_place{
+    -fx-background-color: transparent;
+    -fx-border-color: #f3db9f;
+}
+.non_existent{
+    -fx-background-color: transparent;
+    -fx-border-color: #ed5252;
 }
 
-/* Bônus: Efeito visual quando o botão é clicado */
-.numeric-card:pressed {
-    -fx-background-color: #d0d0d0;
+.delete{
+    -fx-background-color: #ed5252;
+    -fx-border-color: #973535;
 }
 
-.tgb_switch{
-    -fx-background-color: #ff6363;
-}
-.label-titulo {
-    -fx-text-fill: #959595;
-    -fx-font-size: 10px;
-    -fx-font-style: italic;
-    -fx-font-weight: normal;
-    -fx-padding: 5px; /* Espaçamento interno */
+.enter{
+    -fx-background-color: #91e494;
+    -fx-border-color: #5b8e5e;
 }

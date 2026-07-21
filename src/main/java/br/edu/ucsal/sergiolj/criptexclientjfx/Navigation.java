@@ -44,22 +44,6 @@ public class Navigation {
         }
     }
 
-    public static void loadNumKeypadReg(){
-        String fxml = "/view/num_keypad_compact.fxml";
-        String tittle = "Numeric Keyboard";
-        double width = 390;
-        double height = 450;
-        load(fxml,tittle,width,height);
-    }
-
-    public static void loadNumKeypadExp(){
-        String fxml = "/view/num_keypad_extended.fxml";
-        String tittle = "Numeric Keyboard";
-        double width = 390;
-        double height = 450;
-        load(fxml,tittle,width,height);
-    }
-
     public static void loadWelcomeView(){
         String fxml = "/view/welcome-view.fxml";
         String tittle = "Criptex - Descubra a palavra secreta.";
@@ -72,7 +56,7 @@ public class Navigation {
         String fxml = "/view/game-view.fxml";
         String tittle = "Criptex";
         double width = 600;
-        double height = 800;
+        double height = 750;
         load(fxml,tittle,width,height);
     }
 }

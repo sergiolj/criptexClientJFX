@@ -5,7 +5,18 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import java.util.function.Consumer;
+
 public class KeyboardBuilder {
+    private Consumer<String> onKeyPress;
+
+    public KeyboardBuilder() {
+        createVirtualKeyboard();
+    }
+
+    public void setOnKeyPress(Consumer<String> actionOnKeyPressed){
+        this.onKeyPress = actionOnKeyPressed;
+    }
 
     public VBox createVirtualKeyboard(){
         VBox keyboard = new VBox(5);
@@ -25,7 +36,7 @@ public class KeyboardBuilder {
                 Button btn = new Button(String.valueOf(label));
                 btn.getStyleClass().add("common");
                 btn.setPrefSize(40,40);
-                btn.setOnAction(event -> keyPressed(label));
+                btn.setOnAction(event -> keyPressed(String.valueOf(label)));
                 keyboardRow.getChildren().add(btn);
             }
             if(i==0){
@@ -47,15 +58,15 @@ public class KeyboardBuilder {
         return keyboard;
     }
 
-    private void sendPressed() {
+
+    public void sendPressed() {
         System.out.println("Enviando tentativa");
     }
 
-    private void erasePressed() {
+    public void erasePressed() {
         System.out.println("Letra digitada: DELETE");
     }
 
-    private void keyPressed(char label) {
-        System.out.println("Letra digitada: "+label);
+    public void keyPressed(String label) {
     }
 }
