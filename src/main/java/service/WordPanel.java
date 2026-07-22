@@ -55,8 +55,8 @@ public class WordPanel {
                     sendGuess();
                     currentRow++;
                     currentCol = 0;
+                    formatResponse(responseTest());
                 }
-                formatResponse(responseTest());
             }
             case "DELETE" -> {
                 if (currentCol > 0) {
