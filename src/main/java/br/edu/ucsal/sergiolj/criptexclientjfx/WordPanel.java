@@ -72,6 +72,8 @@ public class WordPanel {
                 .collect(Collectors.joining());
         currentRow++;
         currentCol = 0;
+
+
         System.out.println(guess);
     }
 
