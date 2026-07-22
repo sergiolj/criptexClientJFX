@@ -47,15 +47,18 @@ public class WordPanel {
         if(currentCol == 5 && !label.equals("ENTER")  && !label.equals("DELETE")){
             return;
         }
-        System.out.println("Tecla pressionada: " + label);
+
         switch(label){
             case "ENTER" -> {
                 sendGuess();
                 formatResponse(responseTest());
             }
             case "DELETE" -> {
-                currentCol--;
-                letters[currentRow][currentCol].setText("");
+                if(currentCol > 0){
+                    currentCol--;
+                    letters[currentRow][currentCol].setText("");
+                }else return;
+
             }
             default -> {
                 if(currentCol<5){
@@ -64,6 +67,7 @@ public class WordPanel {
                 }
             }
         }
+        System.out.println("Tecla pressionada: " + label);
     }
 
     private void sendGuess() {
