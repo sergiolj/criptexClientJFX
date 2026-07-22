@@ -1,5 +1,6 @@
-package br.edu.ucsal.sergiolj.criptexclientjfx;
+package service;
 
+import util.StatusLetter;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
@@ -25,7 +26,7 @@ public class WordPanel {
             for(int col=0; col<5; col++){
                 StackPane cell = new StackPane();
                 cell.setMinSize(60,60);
-                cell.getStyleClass().add(StatusLetterCSS.EMPTY.getCssClass());
+                cell.getStyleClass().add(StatusLetter.EMPTY.getCssClass());
                 cell.getStyleClass().add("cell-base");
 
                 Text letter = new Text("");
@@ -40,44 +41,43 @@ public class WordPanel {
         return attemptPanel;
     }
 
-    public void command(String label){
-        if(currentRow >= 6){
+    public void command(String label) {
+        if (currentRow >= 6) {
             return;
         }
-        if(currentCol == 5 && !label.equals("ENTER")  && !label.equals("DELETE")){
+        if (currentCol == 5 && !label.equals("ENTER") && !label.equals("DELETE")) {
             return;
         }
 
-        switch(label){
+        switch (label) {
             case "ENTER" -> {
-                sendGuess();
+                if(currentCol == 5){
+                    sendGuess();
+                    currentRow++;
+                    currentCol = 0;
+                }
                 formatResponse(responseTest());
             }
             case "DELETE" -> {
-                if(currentCol > 0){
+                if (currentCol > 0) {
                     currentCol--;
                     letters[currentRow][currentCol].setText("");
                 }
             }
             default -> {
-                if(currentCol<5){
+                if (currentCol < 5) {
                     letters[currentRow][currentCol].setText(label);
                     currentCol++;
                 }
             }
         }
-        System.out.println("Tecla pressionada: " + label);
     }
 
     private void sendGuess() {
         String guess = Arrays.stream(letters[currentRow])
                 .map(Text::getText)
                 .collect(Collectors.joining());
-        currentRow++;
-        currentCol = 0;
-
-
-        System.out.println(guess);
+        System.out.println("Sending to server..." + guess);
     }
 
     private void formatResponse(GuessResponseDTO response){
@@ -86,14 +86,14 @@ public class WordPanel {
 
         for (int i = 0; i < 5; i++) {
             backgroundCells[responseRow][i].getStyleClass()
-                    .remove(StatusLetterCSS.EMPTY.getCssClass());
+                    .remove(StatusLetter.EMPTY.getCssClass());
             switch (status[i]){
                 case 0 -> backgroundCells[responseRow][i].getStyleClass()
-                        .add(StatusLetterCSS.NON_EXISTENT.getCssClass());
+                        .add(StatusLetter.NON_EXISTENT.getCssClass());
                 case 1 -> backgroundCells[responseRow][i].getStyleClass()
-                        .add(StatusLetterCSS.WRONG_PLACE.getCssClass());
+                        .add(StatusLetter.WRONG_PLACE.getCssClass());
                 case 2 -> backgroundCells[responseRow][i].getStyleClass()
-                        .add(StatusLetterCSS.RIGHT.getCssClass());
+                        .add(StatusLetter.RIGHT.getCssClass());
             }
         }
     }

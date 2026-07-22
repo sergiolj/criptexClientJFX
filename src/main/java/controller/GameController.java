@@ -1,5 +1,8 @@
-package br.edu.ucsal.sergiolj.criptexclientjfx;
+package controller;
 
+import client.Player;
+import service.WordPanel;
+import util.KeyboardBuilder;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.input.KeyCode;
@@ -17,8 +20,14 @@ public class GameController {
     public GridPane gp_attempts;
     public VBox vb_keyboard;
 
-    KeyboardBuilder keyboard = new KeyboardBuilder();
-    WordPanel wordPanel = new WordPanel();
+    private Player player;
+    private final KeyboardBuilder keyboard = new KeyboardBuilder();
+    private final WordPanel wordPanel = new WordPanel();
+
+    public void setPlayer(Player player){
+        this.player = player;
+
+    }
 
     @FXML
     public void initialize(){

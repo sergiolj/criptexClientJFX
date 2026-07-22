@@ -1,5 +1,6 @@
-package br.edu.ucsal.sergiolj.criptexclientjfx;
+package criptex;
 
+import service.Navigation;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

@@ -7,7 +7,7 @@
 
 <VBox fx:id="vb_main" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0"
       xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="br.edu.ucsal.sergiolj.criptexclientjfx.GameController">
+      fx:controller="controller.GameController">
       <Label text="Criptex" textAlignment="CENTER">
          <font>
             <Font size="23.0" />

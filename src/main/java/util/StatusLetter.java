@@ -1,6 +1,6 @@
-package br.edu.ucsal.sergiolj.criptexclientjfx;
+package util;
 
-public enum StatusLetterCSS {
+public enum StatusLetter {
     EMPTY ("empty"),
     RIGHT ("right"),
     WRONG_PLACE ("wrong_place"),
@@ -9,7 +9,7 @@ public enum StatusLetterCSS {
     private final String cssClass;
 
 
-    private StatusLetterCSS(String cssClass) {
+    private StatusLetter(String cssClass) {
         this.cssClass = cssClass;
     }
 
