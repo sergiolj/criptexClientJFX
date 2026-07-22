@@ -14,40 +14,35 @@ public class GameController {
     @FXML
     public VBox vb_main;
     @FXML
-    public GridPane gp_attempts, gp_keyboard;
+    public GridPane gp_attempts;
     public VBox vb_keyboard;
 
-    KeyboardBuilder kb = new KeyboardBuilder();
-    WordPanel wp = new WordPanel();
+    KeyboardBuilder keyboard = new KeyboardBuilder();
+    WordPanel wordPanel = new WordPanel();
 
     @FXML
     public void initialize(){
-        gp_attempts.getChildren().add((wp.createWordPanel()));
+        gp_attempts.getChildren().add((wordPanel.createWordPanel()));
 
-        vb_keyboard.getChildren().add(kb.createVirtualKeyboard());
-        kb.setOnKeyPress(this::updateWord);
+        keyboard.setOnKeyPress(comando -> wordPanel.command(comando));
 
+        vb_keyboard.getChildren().add(keyboard.createVirtualKeyboard());
         Platform.runLater(()->
                 vb_keyboard.getScene().setOnKeyPressed(this::linkRealKeyboard));
     }
 
-    private void updateWord(String label){
-        wp.nextLetter(label);
-    }
-
     private void linkRealKeyboard(KeyEvent event){
-        if(event.getCode() == KeyCode.ENTER){
-            kb.sendPressed();
-            return;
+        if (event.getCode() == KeyCode.ENTER) {
+            wordPanel.command("ENTER");
         }
-        if(event.getCode() == KeyCode.BACK_SPACE){
-            kb.erasePressed();
-            return;
+        else if (event.getCode() == KeyCode.BACK_SPACE) {
+            wordPanel.command("DELETE");
         }
-        String keyPressed = event.getText().toUpperCase();
-        if(keyPressed.matches("[A-Z]")){
-            char label = keyPressed.charAt(0);
-            kb.keyPressed(String.valueOf(label));
+        else {
+            String keySelected = event.getText().toUpperCase();
+            if (keySelected.matches("[A-Z]")) {
+                wordPanel.command(keySelected);
+            }
         }
     }
 

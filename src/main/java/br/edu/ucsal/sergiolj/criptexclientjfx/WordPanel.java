@@ -3,6 +3,10 @@ package br.edu.ucsal.sergiolj.criptexclientjfx;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
+import shared.dto.GuessResponseDTO;
+
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class WordPanel {
 
@@ -25,6 +29,7 @@ public class WordPanel {
                 cell.getStyleClass().add("cell-base");
 
                 Text letter = new Text("");
+                letter.getStyleClass().add("panelLetter");
                 cell.getChildren().add(letter);
                 backgroundCells[row][col] = cell;
                 letters[row][col] = letter;
@@ -35,10 +40,60 @@ public class WordPanel {
         return attemptPanel;
     }
 
-    public void nextLetter(String label){
-        if(currentCol<5){
-            letters[currentRow][currentCol].setText(label);
-            currentCol++;
+    public void command(String label){
+        if(currentRow >= 6){
+            return;
         }
+        if(currentCol == 5 && !label.equals("ENTER")  && !label.equals("DELETE")){
+            return;
+        }
+        System.out.println("Tecla pressionada: " + label);
+        switch(label){
+            case "ENTER" -> {
+                sendGuess();
+                formatResponse(responseTest());
+            }
+            case "DELETE" -> {
+                currentCol--;
+                letters[currentRow][currentCol].setText("");
+            }
+            default -> {
+                if(currentCol<5){
+                    letters[currentRow][currentCol].setText(label);
+                    currentCol++;
+                }
+            }
+        }
+    }
+
+    private void sendGuess() {
+        String guess = Arrays.stream(letters[currentRow])
+                .map(Text::getText)
+                .collect(Collectors.joining());
+        currentRow++;
+        currentCol = 0;
+        System.out.println(guess);
+    }
+
+    private void formatResponse(GuessResponseDTO response){
+        int responseRow = currentRow -1;
+        int [] status = response.getStatus();
+
+        for (int i = 0; i < 5; i++) {
+            backgroundCells[responseRow][i].getStyleClass()
+                    .remove(StatusLetterCSS.EMPTY.getCssClass());
+            switch (status[i]){
+                case 0 -> backgroundCells[responseRow][i].getStyleClass()
+                        .add(StatusLetterCSS.NON_EXISTENT.getCssClass());
+                case 1 -> backgroundCells[responseRow][i].getStyleClass()
+                        .add(StatusLetterCSS.WRONG_PLACE.getCssClass());
+                case 2 -> backgroundCells[responseRow][i].getStyleClass()
+                        .add(StatusLetterCSS.RIGHT.getCssClass());
+            }
+        }
+    }
+
+    private GuessResponseDTO responseTest(){
+        return new GuessResponseDTO(new int[]{1, 0, 0, 2, 2},"",false);
     }
 }

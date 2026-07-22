@@ -14,11 +14,11 @@ public class KeyboardBuilder {
         createVirtualKeyboard();
     }
 
-    public void setOnKeyPress(Consumer<String> actionOnKeyPressed){
+    public void setOnKeyPress(Consumer<String> actionOnKeyPressed) {
         this.onKeyPress = actionOnKeyPressed;
     }
 
-    public VBox createVirtualKeyboard(){
+    public VBox createVirtualKeyboard() {
         VBox keyboard = new VBox(5);
         keyboard.setAlignment(Pos.CENTER);
 
@@ -28,29 +28,34 @@ public class KeyboardBuilder {
                 "ZXCVBNM"
         };
 
-        for(int i=0; i<keyboardLines.length; i++){
+        for (int i = 0; i < keyboardLines.length; i++) {
             HBox keyboardRow = new HBox(5);
             keyboardRow.setAlignment(Pos.CENTER);
 
-            for(char label : keyboardLines[i].toCharArray()){
-                Button btn = new Button(String.valueOf(label));
+            for (char label : keyboardLines[i].toCharArray()) {
+                String letter = String.valueOf(label);
+                Button btn = new Button(letter);
+                //Impede que o ENTER do teclado seja usado para enviar uma tecla selecionada.
+                btn.setFocusTraversable(false);
                 btn.getStyleClass().add("common");
-                btn.setPrefSize(40,40);
-                btn.setOnAction(event -> keyPressed(String.valueOf(label)));
+                btn.setPrefSize(40, 40);
+                btn.setOnAction(event -> actionEvent(letter));
                 keyboardRow.getChildren().add(btn);
             }
-            if(i==0){
+            if (i == 0) {
                 Button btn = new Button("DELETE");
+                btn.setFocusTraversable(false);
                 btn.getStyleClass().add("delete");
-                btn.setPrefSize(80,40);
-                btn.setOnAction(event -> erasePressed());
+                btn.setPrefSize(80, 40);
+                btn.setOnAction(event -> actionEvent("DELETE"));
                 keyboardRow.getChildren().add(btn);
 
-            }else if (i==2){
+            } else if (i == 2) {
                 Button btn = new Button("ENTER");
+                btn.setFocusTraversable(false);
                 btn.getStyleClass().add("enter");
-                btn.setPrefSize(80,40);
-                btn.setOnAction(event -> sendPressed());
+                btn.setPrefSize(80, 40);
+                btn.setOnAction(event -> actionEvent("ENTER"));
                 keyboardRow.getChildren().add(btn);
             }
             keyboard.getChildren().add(keyboardRow);
@@ -58,15 +63,10 @@ public class KeyboardBuilder {
         return keyboard;
     }
 
-
-    public void sendPressed() {
-        System.out.println("Enviando tentativa");
+    public void actionEvent(String command) {
+        if(onKeyPress != null){
+            onKeyPress.accept(command);
+        }
     }
 
-    public void erasePressed() {
-        System.out.println("Letra digitada: DELETE");
-    }
-
-    public void keyPressed(String label) {
-    }
 }
