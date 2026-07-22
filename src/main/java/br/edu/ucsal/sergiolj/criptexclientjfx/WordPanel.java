@@ -57,8 +57,7 @@ public class WordPanel {
                 if(currentCol > 0){
                     currentCol--;
                     letters[currentRow][currentCol].setText("");
-                }else return;
-
+                }
             }
             default -> {
                 if(currentCol<5){
