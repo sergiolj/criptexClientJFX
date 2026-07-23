@@ -5,9 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox fx:id="vb_main" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0"
-      xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="controller.GameController">
+<VBox fx:id="vb_main" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GameController">
       <Label text="Criptex" textAlignment="CENTER">
          <font>
             <Font size="23.0" />
@@ -17,8 +15,16 @@
       </VBox.margin></Label>
       <GridPane fx:id="gp_attempts" alignment="TOP_CENTER">
       <VBox.margin>
-         <Insets bottom="80.0" />
+         <Insets bottom="30.0" />
       </VBox.margin></GridPane>
+   <Label fx:id="lb_invalid_response" alignment="CENTER" contentDisplay="CENTER" text="palavra inválida" textFill="#909090" visible="false">
+      <font>
+         <Font name="System Bold" size="22.0" />
+      </font>
+      <VBox.margin>
+         <Insets bottom="30.0" />
+      </VBox.margin>
+   </Label>
 
       <VBox fx:id="vb_keyboard">
       </VBox>

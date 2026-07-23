@@ -1,6 +1,5 @@
 package client;
 
-import util.Word;
 import shared.status.GameSession;
 import shared.config.Config;
 import shared.dto.GuessRequestDTO;
@@ -64,36 +63,31 @@ public class Player implements Serializable, ClientInterface {
      */
 
     public GuessResponseDTO verifyGuess(String guess) throws RemoteException {
-        guess = Word.removeAccent(guess);
-
         if (!gameSession.hasAttempts()) {
             System.out.println("Você não possui mais tentativas.");
             return null;
         }
         System.out.println("Existem tentativas");
 
-        if (!Word.validate(guess)) {
-            System.out.println("Palpite inválido. A palavra precisa ter exatamente 5 letras.");
-            return null;
-        }
-        System.out.println("Palpite aceito");
-
         GuessRequestDTO request = new GuessRequestDTO(this.uuid, guess);
         GuessResponseDTO response = this.proxy.verifyGuess(request);
-        gameSession.increaseAttempt();
+        if (response != null) {
+            gameSession.increaseAttempt();
 
-        GuessResponseDTO responseWithAttempt = new GuessResponseDTO(
-                response.getStatus(),
-                response.getGuess(),
-                response.isWordMatch(),
-                gameSession.getAttempt()
-        );
+            GuessResponseDTO responseWithAttempt = new GuessResponseDTO(
+                    response.getStatus(),
+                    response.getGuess(),
+                    response.isWordMatch(),
+                    gameSession.getAttempt()
+            );
 
-        if (responseWithAttempt.isWordMatch()) {
-            score++;
+            if (responseWithAttempt.isWordMatch()) {
+                score++;
+            }
+
+            return responseWithAttempt;
         }
-
-        return responseWithAttempt;
+        return null;
     }
 
     public GameSession getGameSession() {

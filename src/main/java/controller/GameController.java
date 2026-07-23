@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.scene.control.Label;
 import service.PlayerManagerRMI;
 import service.WordPanel;
 import shared.dto.GuessResponseDTO;
@@ -27,6 +28,8 @@ public class GameController {
     @FXML
     public GridPane gp_attempts;
     public VBox vb_keyboard;
+    @FXML
+    public Label lb_invalid_response;
 
     private PlayerManagerRMI playerManager;
     private final KeyboardBuilder keyboard = new KeyboardBuilder();
@@ -56,13 +59,20 @@ public class GameController {
                 try {
                     System.out.println("Criando response");
                     GuessResponseDTO response = playerManager.getPlayer().verifyGuess(guess);
-                    System.out.println("Formatando resposta no Painel");
-                    wordPanel.formatResponse(response);
+                    if (response != null) {
+                        System.out.println("Formatando resposta no Painel");
+                        wordPanel.formatResponse(response);
+                    } else {
+                        System.out.println("Palavra não reconhecida.");
+                        wordPanel.rollBack();
+                        lb_invalid_response.setVisible(true);
+                    }
                 } catch (RemoteException e) {
                     System.out.println("Erro ao enviar palpite." + e.getMessage());
                 }
             }
         } else {
+            lb_invalid_response.setVisible(false);
             wordPanel.command(command);
         }
     }

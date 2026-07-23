@@ -119,4 +119,9 @@ public class WordPanel {
             }
         }
     }
+
+    public void rollBack() {
+        currentCol = 5;
+        currentRow--;
+    }
 }
