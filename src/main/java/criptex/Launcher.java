@@ -6,6 +6,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ *
+ * @author Sérgio Lopes Júnior
+ *
+ * @version 1.0
+ */
 public class Launcher extends Application{
     @Override
     public void start(Stage stage) throws IOException {

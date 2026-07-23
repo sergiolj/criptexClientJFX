@@ -7,6 +7,12 @@ import javafx.scene.layout.VBox;
 
 import java.util.function.Consumer;
 
+/**
+ *
+ * @author Sérgio Lopes Júnior
+ *
+ * @version 1.0
+ */
 public class KeyboardBuilder {
     private Consumer<String> onKeyPress;
 

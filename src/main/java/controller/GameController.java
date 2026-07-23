@@ -14,7 +14,12 @@ import javafx.scene.layout.VBox;
 
 import java.rmi.RemoteException;
 
-
+/**
+ *
+ * @author Sérgio Lopes Júnior
+ *
+ * @version 1.0
+ */
 public class GameController {
 
     @FXML
@@ -36,35 +41,43 @@ public class GameController {
     public void initialize(){
         gp_attempts.getChildren().add((wordPanel.createWordPanel()));
 
-        keyboard.setOnKeyPress(comando -> wordPanel.command(comando));
+        keyboard.setOnKeyPress(this::processCommand);
 
         vb_keyboard.getChildren().add(keyboard.createVirtualKeyboard());
         Platform.runLater(()->
                 vb_keyboard.getScene().setOnKeyPressed(this::linkRealKeyboard));
     }
 
-    private void linkRealKeyboard(KeyEvent event){
-        if (event.getCode() == KeyCode.ENTER) {
+    private void processCommand(String command) {
+        if (command.equals("ENTER")) {
             String guess = wordPanel.command("ENTER");
             System.out.println("Palavra retornada");
-            if(guess != null){
-                try{
+            if (guess != null) {
+                try {
                     System.out.println("Criando response");
-                    GuessResponseDTO response =  playerManager.getPlayer().verifyGuess(guess);
+                    GuessResponseDTO response = playerManager.getPlayer().verifyGuess(guess);
                     System.out.println("Formatando resposta no Painel");
                     wordPanel.formatResponse(response);
-                }catch (RemoteException e){
+                } catch (RemoteException e) {
                     System.out.println("Erro ao enviar palpite." + e.getMessage());
                 }
             }
+        } else {
+            wordPanel.command(command);
+        }
+    }
+
+    private void linkRealKeyboard(KeyEvent event){
+        if (event.getCode() == KeyCode.ENTER) {
+                processCommand("ENTER");
         }
         else if (event.getCode() == KeyCode.BACK_SPACE) {
-            wordPanel.command("DELETE");
+            processCommand("DELETE");
         }
         else {
             String keySelected = event.getText().toUpperCase();
             if (keySelected.matches("[A-Z]")) {
-                wordPanel.command(keySelected);
+                processCommand(keySelected);
             }
         }
     }

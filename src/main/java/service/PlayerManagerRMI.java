@@ -2,6 +2,12 @@ package service;
 
 import client.Player;
 
+/**
+ *
+ * @author Sérgio Lopes Júnior
+ *
+ * @version 1.0
+ */
 public class PlayerManagerRMI {
     private static PlayerManagerRMI instance;
     private Player player;

@@ -9,6 +9,12 @@ import shared.dto.GuessResponseDTO;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
+/**
+ *
+ * @author Sérgio Lopes Júnior
+ *
+ * @version 1.0
+ */
 public class WordPanel {
 
     private final StackPane[][] backgroundCells = new StackPane[6][5];
@@ -41,6 +47,10 @@ public class WordPanel {
         return attemptPanel;
     }
 
+    /**
+     * Retorna a palavra adicionada pelo usuário após a verificação de que a palavra contém 5 caracteres.
+     * @return String guess, caso a palavra esteja completa ou nulo.
+     */
     public String getWord() {
         if (currentCol == 5) {
             String guess = Arrays.stream(letters[currentRow])
@@ -55,6 +65,12 @@ public class WordPanel {
         return null;
     }
 
+    /**
+     * Processa os comandos enviados pelo controller para atualização do painel de palavras.
+     * @param label comando enviado pelo controller.
+     * @return Caso o comando seja ENTER, aciona o método getWord que valida a palavra e retorna a String ou nulo para
+     * os demais comandos.
+     */
     public String command(String label) {
         if (currentRow >= 6) {
             return null;
@@ -66,22 +82,23 @@ public class WordPanel {
         String word = null;
 
         switch (label) {
-            case "ENTER" -> {
+            case "ENTER":
                 word = getWord();
-            }
-            case "DELETE" -> {
+                break;
+
+            case "DELETE":
                 if (currentCol > 0) {
                     currentCol--;
                     letters[currentRow][currentCol].setText("");
                 }
-            }
-            default -> {
+                break;
+            default:
                 if (currentCol < 5) {
                     letters[currentRow][currentCol].setText(label);
                     currentCol++;
                 }
+                break;
             }
-        }
         return word;
     }
 
@@ -101,9 +118,5 @@ public class WordPanel {
                         .add(StatusLetter.RIGHT.getCssClass());
             }
         }
-    }
-
-    private GuessResponseDTO responseTest(){
-        return new GuessResponseDTO(new int[]{1, 0, 0, 2, 2},"",false);
     }
 }

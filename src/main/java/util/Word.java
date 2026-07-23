@@ -34,6 +34,7 @@ public class Word implements Serializable {
 
     private static boolean wordExists(String word) {
         String verifyWord = removeAccent(word);
+
         return true;
     }
 

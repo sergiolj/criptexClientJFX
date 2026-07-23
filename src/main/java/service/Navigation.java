@@ -10,6 +10,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
 
+/**
+ *
+ * @author Sérgio Lopes Júnior
+ *
+ * @version 1.0
+ */
 public class Navigation {
     private static Stage stage;
 
@@ -53,6 +59,9 @@ public class Navigation {
             Parent root = loader.load();
 
             setupScene(root,title,width,height);
+
+            root.setStyle("-fx-background-color: " +
+                    "linear-gradient(from 0% 0% to 100% 100%, #0a0f1e 0%, #3c3f4a 50%, #000000 100%)");
             stage.show();
         } catch (IOException e) {
             throw new RuntimeException(e);

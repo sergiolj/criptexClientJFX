@@ -32,11 +32,15 @@
 }
 
 .delete{
-    -fx-background-color: #ed5252;
     -fx-border-color: transparent;
+    -fx-font-weight: bold ;
+    -fx-text-fill: #ed5252;
+    -fx-font-size: 15px;
 }
 
 .enter{
-    -fx-background-color: #91e494;
     -fx-border-color: transparent;
+    -fx-font-weight: bold ;
+    -fx-text-fill: #375c38;
+    -fx-font-size: 15px;
 }

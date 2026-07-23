@@ -1,5 +1,11 @@
 package util;
 
+/**
+ *
+ * @author Sérgio Lopes Júnior
+ *
+ * @version 1.0
+ */
 public enum StatusLetter {
     EMPTY ("empty"),
     RIGHT ("right"),
