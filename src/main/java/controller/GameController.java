@@ -1,7 +1,8 @@
 package controller;
 
-import client.Player;
+import service.PlayerManagerRMI;
 import service.WordPanel;
+import shared.dto.GuessResponseDTO;
 import util.KeyboardBuilder;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -10,6 +11,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 
 import javafx.scene.layout.VBox;
+
+import java.rmi.RemoteException;
 
 
 public class GameController {
@@ -20,12 +23,12 @@ public class GameController {
     public GridPane gp_attempts;
     public VBox vb_keyboard;
 
-    private Player player;
+    private PlayerManagerRMI playerManager;
     private final KeyboardBuilder keyboard = new KeyboardBuilder();
     private final WordPanel wordPanel = new WordPanel();
 
-    public void setPlayer(Player player){
-        this.player = player;
+    public void setPlayer(PlayerManagerRMI playerManager){
+        this.playerManager = playerManager;
 
     }
 
@@ -42,7 +45,18 @@ public class GameController {
 
     private void linkRealKeyboard(KeyEvent event){
         if (event.getCode() == KeyCode.ENTER) {
-            wordPanel.command("ENTER");
+            String guess = wordPanel.command("ENTER");
+            System.out.println("Palavra retornada");
+            if(guess != null){
+                try{
+                    System.out.println("Criando response");
+                    GuessResponseDTO response =  playerManager.getPlayer().verifyGuess(guess);
+                    System.out.println("Formatando resposta no Painel");
+                    wordPanel.formatResponse(response);
+                }catch (RemoteException e){
+                    System.out.println("Erro ao enviar palpite." + e.getMessage());
+                }
+            }
         }
         else if (event.getCode() == KeyCode.BACK_SPACE) {
             wordPanel.command("DELETE");
@@ -54,6 +68,4 @@ public class GameController {
             }
         }
     }
-
-
 }

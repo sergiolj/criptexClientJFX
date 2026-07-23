@@ -1,6 +1,5 @@
 package service;
 
-import client.Player;
 import controller.GameController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -60,7 +59,7 @@ public class Navigation {
         }
     }
 
-    public static void loadGameView(Player player){
+    public static void loadGameView(PlayerManagerRMI playerManager){
         String fxml = "/view/game-view.fxml";
         String title = "Criptex";
         double width = 600;
@@ -70,7 +69,7 @@ public class Navigation {
 
             Parent root = loader.load();
             GameController controller = loader.getController();
-            controller.setPlayer(player);
+            controller.setPlayer(playerManager);
 
             setupScene(root,title,width,height);
 

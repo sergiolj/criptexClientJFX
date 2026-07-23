@@ -41,22 +41,33 @@ public class WordPanel {
         return attemptPanel;
     }
 
-    public void command(String label) {
+    public String getWord() {
+        if (currentCol == 5) {
+            String guess = Arrays.stream(letters[currentRow])
+                    .map(Text::getText)
+                    .collect(Collectors.joining());
+
+            currentRow++;
+            currentCol = 0;
+            System.out.println(guess);
+            return guess;
+        }
+        return null;
+    }
+
+    public String command(String label) {
         if (currentRow >= 6) {
-            return;
+            return null;
         }
         if (currentCol == 5 && !label.equals("ENTER") && !label.equals("DELETE")) {
-            return;
+            return null;
         }
+
+        String word = null;
 
         switch (label) {
             case "ENTER" -> {
-                if(currentCol == 5){
-                    sendGuess();
-                    currentRow++;
-                    currentCol = 0;
-                    formatResponse(responseTest());
-                }
+                word = getWord();
             }
             case "DELETE" -> {
                 if (currentCol > 0) {
@@ -71,16 +82,10 @@ public class WordPanel {
                 }
             }
         }
+        return word;
     }
 
-    private void sendGuess() {
-        String guess = Arrays.stream(letters[currentRow])
-                .map(Text::getText)
-                .collect(Collectors.joining());
-        System.out.println("Sending to server..." + guess);
-    }
-
-    private void formatResponse(GuessResponseDTO response){
+    public void formatResponse(GuessResponseDTO response){
         int responseRow = currentRow -1;
         int [] status = response.getStatus();
 

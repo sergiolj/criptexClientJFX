@@ -1,7 +1,7 @@
 package controller;
 
 import service.Navigation;
-import service.RMIClientManager;
+import service.PlayerManagerRMI;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -21,9 +21,9 @@ public class WelcomeController {
             String username = txf_username.getText().isBlank() ?
                     "Anonymous" : txf_username.getText();
 
-            RMIClientManager playerManager = RMIClientManager.getInstance();
+            PlayerManagerRMI playerManager = PlayerManagerRMI.getInstance();
             playerManager.connect(username, Config.IP_ADDRESS, Config.SERVER_PORT);
-            Navigation.loadGameView(playerManager.getPlayer());
+            Navigation.loadGameView(playerManager);
         });
     }
 }

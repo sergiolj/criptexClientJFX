@@ -2,16 +2,16 @@ package service;
 
 import client.Player;
 
-public class RMIClientManager {
-    private static RMIClientManager instance;
+public class PlayerManagerRMI {
+    private static PlayerManagerRMI instance;
     private Player player;
     private boolean isConnected = false;
 
-    private RMIClientManager(){}
+    private PlayerManagerRMI(){}
 
-    public static synchronized RMIClientManager getInstance() {
+    public static synchronized PlayerManagerRMI getInstance() {
         if (instance == null) {
-            instance = new RMIClientManager();
+            instance = new PlayerManagerRMI();
         }
         return instance;
     }

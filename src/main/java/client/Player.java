@@ -63,18 +63,20 @@ public class Player implements Serializable, ClientInterface {
      * @throws RemoteException
      */
 
-    public boolean verifyGuess(String guess) throws RemoteException {
+    public GuessResponseDTO verifyGuess(String guess) throws RemoteException {
         guess = Word.removeAccent(guess);
 
         if (!gameSession.hasAttempts()) {
             System.out.println("Você não possui mais tentativas.");
-            return false;
+            return null;
         }
+        System.out.println("Existem tentativas");
 
         if (!Word.validate(guess)) {
             System.out.println("Palpite inválido. A palavra precisa ter exatamente 5 letras.");
-            return false;
+            return null;
         }
+        System.out.println("Palpite aceito");
 
         GuessRequestDTO request = new GuessRequestDTO(this.uuid, guess);
         GuessResponseDTO response = this.proxy.verifyGuess(request);
@@ -91,7 +93,7 @@ public class Player implements Serializable, ClientInterface {
             score++;
         }
 
-        return responseWithAttempt.isWordMatch();
+        return responseWithAttempt;
     }
 
     public GameSession getGameSession() {
