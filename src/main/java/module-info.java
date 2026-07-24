@@ -10,6 +10,8 @@ module criptex{
 
     exports shared.remote;
     opens shared.remote to javafx.fxml;
+    exports shared.status;
+    opens shared.status to javafx.fxml;
     exports shared.dto;
     opens shared.dto to javafx.fxml;
     exports util;

@@ -1,15 +1,16 @@
 package controller;
 
 
+import client.Player;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import service.Navigation;
-import service.PlayerManagerRMI;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
 import javafx.scene.control.TextField;
 import shared.config.Config;
+import shared.status.GameSession;
 import util.AlertWindow;
 
 import java.rmi.ConnectException;
@@ -43,11 +44,12 @@ public class WelcomeController {
             String username = txf_username.getText().isBlank() ?
                     "Anonymous" : txf_username.getText();
 
-            PlayerManagerRMI playerManager = PlayerManagerRMI.getInstance();
+            Player player = new Player(username);
 
             try{
-                playerManager.connect(username, Config.IP_ADDRESS, Config.SERVER_PORT);
-                Navigation.loadGameView(playerManager);
+                GameSession gameSession = GameSession.getInstance();
+                gameSession.connect(player);
+                Navigation.loadGameView(gameSession);
             }catch (ConnectException e){
                 AlertWindow.showError("Conexão recusada",
                         "Não foi possível conectar com o servidor em " + Config.IP_ADDRESS,

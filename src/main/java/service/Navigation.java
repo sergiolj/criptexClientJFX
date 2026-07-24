@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import shared.status.GameSession;
 
 import java.io.IOException;
 import java.net.URL;
@@ -68,7 +69,7 @@ public class Navigation {
         }
     }
 
-    public static void loadGameView(PlayerManagerRMI playerManager){
+    public static void loadGameView(GameSession gameSession){
         String fxml = "/view/game-view.fxml";
         String title = "Criptex";
         double width = 600;
@@ -78,7 +79,7 @@ public class Navigation {
 
             Parent root = loader.load();
             GameController controller = loader.getController();
-            controller.setPlayer(playerManager);
+            controller.setGameSession(gameSession);
 
             setupScene(root,title,width,height);
 

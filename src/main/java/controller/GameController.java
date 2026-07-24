@@ -1,11 +1,10 @@
 package controller;
 
-import client.Player;
 import javafx.scene.control.Label;
 import service.Navigation;
-import service.PlayerManagerRMI;
 import service.WordPanel;
 import shared.dto.GuessResponse;
+import shared.status.GameSession;
 import util.KeyboardBuilder;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -33,15 +32,12 @@ public class GameController {
     @FXML
     public Label lb_invalid_word;
 
-    private PlayerManagerRMI playerManager;
-    private Player player;
+    private GameSession gameSession;
     private final KeyboardBuilder keyboard = new KeyboardBuilder();
     private final WordPanel wordPanel = new WordPanel();
 
-    public void setPlayer(PlayerManagerRMI playerManager){
-        this.playerManager = playerManager;
-        this.player = playerManager.getPlayer();
-
+    public void setGameSession(GameSession gameSession){
+        this.gameSession = gameSession;
     }
 
     @FXML
@@ -62,11 +58,11 @@ public class GameController {
             if (guess != null) {
                 try {
                     System.out.println("Criando response");
-                    GuessResponse response = playerManager.getPlayer().verifyGuess(guess);
+                    GuessResponse response = gameSession.verifyGuess(guess);
                     if (response != null) {
                         System.out.println("Formatando resposta no Painel");
                         wordPanel.formatResponse(response);
-                        if(!player.getGameSession().hasAttempts()){
+                        if(!gameSession.hasAttempts()){
                             Navigation.loadGameScore();
                         }
                     } else {
