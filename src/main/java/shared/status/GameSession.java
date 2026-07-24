@@ -46,11 +46,11 @@ public class GameSession implements Serializable {
     }
 
     public GuessResponse verifyGuess(String guess) throws RemoteException {
-        if (!hasAttempts()) {
+        if (noAttemptsLeft()) {
             System.out.println("Você não possui mais tentativas.");
             return null;
         }
-        System.out.println("Existem tentativas");
+        System.out.println("Tentativas registradas " + attempt);
 
         GuessRequest request = new GuessRequest(player.getUuid(), guess);
         GuessResponse response = this.proxy.verifyGuess(request);
@@ -64,6 +64,7 @@ public class GameSession implements Serializable {
                     getAttempt()
             );
 
+            System.out.println("Tentativa registrada! " + attempt);
             if (responseWithAttempt.isWordMatch()) {
                 player.updateScore();
             }
@@ -116,9 +117,9 @@ public class GameSession implements Serializable {
         return attempt;
     }
 
-    public boolean hasAttempts() {
+    public boolean noAttemptsLeft() {
         int maxAttempts = 6;
-        return attempt < maxAttempts;
+        return attempt >= maxAttempts;
     }
 
 

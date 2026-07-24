@@ -54,7 +54,10 @@ public class GameController {
     private void processCommand(String command) {
         if (command.equals("ENTER")) {
             String guess = wordPanel.command("ENTER");
-            System.out.println("Palavra retornada");
+            System.out.println("Palavra retornada " + guess);
+            if (gameSession.noAttemptsLeft()) {
+                Navigation.loadGameScore();
+            }
             if (guess != null) {
                 try {
                     System.out.println("Criando response");
@@ -62,9 +65,6 @@ public class GameController {
                     if (response != null) {
                         System.out.println("Formatando resposta no Painel");
                         wordPanel.formatResponse(response);
-                        if(!gameSession.hasAttempts()){
-                            Navigation.loadGameScore();
-                        }
                     } else {
                         System.out.println("Palavra não reconhecida.");
                         wordPanel.rollBack();
