@@ -5,7 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import view.manager.Navigation;
 
-import network.GameSession;
+import rmi.network.GameSession;
 import util.AlertWindow;
 
 import java.rmi.RemoteException;

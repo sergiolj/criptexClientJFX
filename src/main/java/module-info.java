@@ -17,12 +17,12 @@ module criptex{
     opens util to javafx.fxml;
     exports controller;
     opens controller to javafx.fxml;
-    exports component;
-    opens component to javafx.fxml;
-    exports client;
-    opens client to javafx.fxml;
+    exports ui.component;
+    opens ui.component to javafx.fxml;
+    exports model;
+    opens model to javafx.fxml;
     exports view.manager;
     opens view.manager to javafx.fxml;
-    exports network;
-    opens network to javafx.fxml;
+    exports rmi.network;
+    opens rmi.network to javafx.fxml;
 }

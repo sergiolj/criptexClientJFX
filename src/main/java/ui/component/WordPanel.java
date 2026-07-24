@@ -1,6 +1,5 @@
-package component;
+package ui.component;
 
-import util.StatusLetter;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;

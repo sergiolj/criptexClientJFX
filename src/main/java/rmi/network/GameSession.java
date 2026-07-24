@@ -1,6 +1,6 @@
-package network;
+package rmi.network;
 
-import client.Player;
+import model.Player;
 import shared.config.Config;
 import shared.dto.GuessRequest;
 import shared.dto.GuessResponse;

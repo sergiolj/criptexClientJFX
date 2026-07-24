@@ -1,7 +1,7 @@
 package controller;
 
 
-import client.Player;
+import model.Player;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import view.manager.Navigation;
@@ -10,7 +10,7 @@ import javafx.scene.control.Button;
 
 import javafx.scene.control.TextField;
 import shared.config.Config;
-import network.GameSession;
+import rmi.network.GameSession;
 import util.AlertWindow;
 
 import java.rmi.ConnectException;

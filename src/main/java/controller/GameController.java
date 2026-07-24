@@ -2,10 +2,10 @@ package controller;
 
 import javafx.scene.control.Label;
 import view.manager.Navigation;
-import component.WordPanel;
+import ui.component.WordPanel;
 import shared.dto.GuessResponse;
-import network.GameSession;
-import util.KeyboardBuilder;
+import rmi.network.GameSession;
+import ui.component.KeyboardBuilder;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.input.KeyCode;
