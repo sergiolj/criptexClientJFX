@@ -9,7 +9,6 @@ import shared.config.Config;
 import shared.status.GameSession;
 import util.AlertWindow;
 
-import java.rmi.ConnectException;
 import java.rmi.RemoteException;
 
 public class GameScoreController {
@@ -24,6 +23,7 @@ public class GameScoreController {
             try{
                 GameSession gameSession = GameSession.getInstance();
                 gameSession.disconnect();
+
                 Navigation.loadWelcomeView();
             }catch (RemoteException e){
                 AlertWindow.showError("Erro ao desconectar jogador",

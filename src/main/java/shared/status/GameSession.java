@@ -12,7 +12,9 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.sql.Date;
 import java.time.Instant;
+import java.time.LocalDateTime;
 
 
 /**
@@ -47,6 +49,7 @@ public class GameSession implements Serializable {
 
     public GuessResponse verifyGuess(String guess) throws RemoteException {
         if (noAttemptsLeft()) {
+            System.out.println(this.player.getName() + " | " + startTime);
             System.out.println("Você não possui mais tentativas.");
             return null;
         }
@@ -99,7 +102,7 @@ public class GameSession implements Serializable {
         try {
             if (player != null) {
                 proxy.logoutUser(this.player);
-                player = null;
+                instance = null;
             }
             isConnected = false;
         } catch (Exception e) {

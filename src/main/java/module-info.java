@@ -3,6 +3,7 @@ module criptex{
     requires javafx.fxml;
     requires java.rmi;
     requires java.desktop;
+    requires java.sql;
 
 
     exports criptex;
