@@ -3,10 +3,9 @@ package controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
-import service.Navigation;
+import view.manager.Navigation;
 
-import shared.config.Config;
-import shared.status.GameSession;
+import network.GameSession;
 import util.AlertWindow;
 
 import java.rmi.RemoteException;

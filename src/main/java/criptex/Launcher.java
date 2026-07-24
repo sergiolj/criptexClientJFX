@@ -1,6 +1,6 @@
 package criptex;
 
-import service.Navigation;
+import view.manager.Navigation;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

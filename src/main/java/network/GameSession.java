@@ -1,4 +1,4 @@
-package shared.status;
+package network;
 
 import client.Player;
 import shared.config.Config;
@@ -12,9 +12,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.sql.Date;
 import java.time.Instant;
-import java.time.LocalDateTime;
 
 
 /**

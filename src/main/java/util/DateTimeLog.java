@@ -1,4 +1,4 @@
-package shared.status;
+package util;
 
 import java.time.LocalDateTime;
 

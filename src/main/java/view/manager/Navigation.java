@@ -1,11 +1,11 @@
-package service;
+package view.manager;
 
 import controller.GameController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import shared.status.GameSession;
+import network.GameSession;
 
 import java.io.IOException;
 import java.net.URL;

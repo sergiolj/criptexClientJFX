@@ -11,16 +11,18 @@ module criptex{
 
     exports shared.remote;
     opens shared.remote to javafx.fxml;
-    exports shared.status;
-    opens shared.status to javafx.fxml;
     exports shared.dto;
     opens shared.dto to javafx.fxml;
     exports util;
     opens util to javafx.fxml;
     exports controller;
     opens controller to javafx.fxml;
-    exports service;
-    opens service to javafx.fxml;
+    exports component;
+    opens component to javafx.fxml;
     exports client;
     opens client to javafx.fxml;
+    exports view.manager;
+    opens view.manager to javafx.fxml;
+    exports network;
+    opens network to javafx.fxml;
 }

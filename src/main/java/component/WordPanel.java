@@ -1,4 +1,4 @@
-package service;
+package component;
 
 import util.StatusLetter;
 import javafx.scene.layout.GridPane;

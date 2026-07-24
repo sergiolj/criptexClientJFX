@@ -4,13 +4,13 @@ package controller;
 import client.Player;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import service.Navigation;
+import view.manager.Navigation;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
 import javafx.scene.control.TextField;
 import shared.config.Config;
-import shared.status.GameSession;
+import network.GameSession;
 import util.AlertWindow;
 
 import java.rmi.ConnectException;
