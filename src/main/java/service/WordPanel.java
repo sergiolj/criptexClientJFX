@@ -4,7 +4,7 @@ import util.StatusLetter;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
-import shared.dto.GuessResponseDTO;
+import shared.dto.GuessResponse;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -102,7 +102,7 @@ public class WordPanel {
         return word;
     }
 
-    public void formatResponse(GuessResponseDTO response){
+    public void formatResponse(GuessResponse response){
         int responseRow = currentRow -1;
         int [] status = response.getStatus();
 

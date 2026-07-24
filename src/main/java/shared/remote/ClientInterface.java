@@ -1,5 +1,6 @@
 package shared.remote;
 
+import java.rmi.Remote;
 import java.util.UUID;
 
 /**
@@ -8,7 +9,7 @@ import java.util.UUID;
  *
  * @version 1.0
  */
-public interface ClientInterface {
+public interface ClientInterface extends Remote {
     String getName();
     UUID getUuid();
 }

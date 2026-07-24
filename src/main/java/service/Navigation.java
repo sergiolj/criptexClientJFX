@@ -87,4 +87,22 @@ public class Navigation {
             throw new RuntimeException(e);
         }
     }
+
+    public static void loadGameScore(){
+        String fxml = "/view/game-score.fxml";
+        String title = "Criptex Score";
+        double width = 300;
+        double height = 450;
+        try{
+            FXMLLoader loader = loadFXML(fxml);
+
+            Parent root = loader.load();
+
+            setupScene(root,title,width,height);
+
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

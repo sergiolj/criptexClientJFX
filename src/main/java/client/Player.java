@@ -1,9 +1,10 @@
 package client;
 
+import service.PlayerManagerRMI;
 import shared.status.GameSession;
 import shared.config.Config;
-import shared.dto.GuessRequestDTO;
-import shared.dto.GuessResponseDTO;
+import shared.dto.GuessRequest;
+import shared.dto.GuessResponse;
 import shared.remote.ClientInterface;
 import shared.remote.ServerInterface;
 
@@ -13,6 +14,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.UUID;
 
 /**
@@ -48,7 +50,7 @@ public class Player implements Serializable, ClientInterface {
             Registry registry = LocateRegistry.getRegistry(Config.IP_ADDRESS, Config.SERVER_PORT);
             this.proxy = (ServerInterface) registry.lookup(Config.SERVER_NAME);
 
-            this.proxy.registerUser(this);
+            this.proxy.loginUser(this);
             this.gameSession = new GameSession();
 
         } catch (NotBoundException e) {
@@ -58,23 +60,37 @@ public class Player implements Serializable, ClientInterface {
 
     /**
      *
-     * @param guess
      * @throws RemoteException
      */
 
-    public GuessResponseDTO verifyGuess(String guess) throws RemoteException {
+    public void disconnect(){
+        if(proxy != null){
+            try{
+                proxy.logoutUser(this);
+                /* Não foi implementado CallBack. Player não extende UnicastRemoteObject e não abre portas de acesso para
+                 o servidor enviar ativamente atualizações, logo não há objeto para ser fechado (unexport).
+                UnicastRemoteObject.unexportObject(this, true);
+                */
+            }catch (RemoteException e){
+                System.out.println("Erro ao tentar desconectar:  " + e.getMessage());
+            }
+        }
+    }
+
+
+    public GuessResponse verifyGuess(String guess) throws RemoteException {
         if (!gameSession.hasAttempts()) {
             System.out.println("Você não possui mais tentativas.");
             return null;
         }
         System.out.println("Existem tentativas");
 
-        GuessRequestDTO request = new GuessRequestDTO(this.uuid, guess);
-        GuessResponseDTO response = this.proxy.verifyGuess(request);
+        GuessRequest request = new GuessRequest(this.uuid, guess);
+        GuessResponse response = this.proxy.verifyGuess(request);
         if (response != null) {
-            gameSession.increaseAttempt();
+            gameSession.registerAttempt();
 
-            GuessResponseDTO responseWithAttempt = new GuessResponseDTO(
+            GuessResponse responseWithAttempt = new GuessResponse(
                     response.getStatus(),
                     response.getGuess(),
                     response.isWordMatch(),
@@ -94,13 +110,11 @@ public class Player implements Serializable, ClientInterface {
         return gameSession;
     }
 
-    public int getAttempts() {
-        return gameSession.getAttempt();
-    }
 
     public int getScore() {
         return score;
     }
+
     @Override
     public String getName() {
         return name;

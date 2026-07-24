@@ -17,7 +17,8 @@
       <VBox.margin>
          <Insets bottom="30.0" />
       </VBox.margin></GridPane>
-   <Label fx:id="lb_invalid_response" alignment="CENTER" contentDisplay="CENTER" text="palavra inválida" textFill="#909090" visible="false">
+   <Label fx:id="lb_invalid_word" alignment="CENTER" contentDisplay="CENTER"
+          text="palavra inválida" textFill="#909090" visible="false">
       <font>
          <Font name="System Bold" size="22.0" />
       </font>

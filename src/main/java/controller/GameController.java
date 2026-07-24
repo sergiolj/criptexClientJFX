@@ -1,9 +1,11 @@
 package controller;
 
+import client.Player;
 import javafx.scene.control.Label;
+import service.Navigation;
 import service.PlayerManagerRMI;
 import service.WordPanel;
-import shared.dto.GuessResponseDTO;
+import shared.dto.GuessResponse;
 import util.KeyboardBuilder;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -29,14 +31,16 @@ public class GameController {
     public GridPane gp_attempts;
     public VBox vb_keyboard;
     @FXML
-    public Label lb_invalid_response;
+    public Label lb_invalid_word;
 
     private PlayerManagerRMI playerManager;
+    private Player player;
     private final KeyboardBuilder keyboard = new KeyboardBuilder();
     private final WordPanel wordPanel = new WordPanel();
 
     public void setPlayer(PlayerManagerRMI playerManager){
         this.playerManager = playerManager;
+        this.player = playerManager.getPlayer();
 
     }
 
@@ -58,21 +62,24 @@ public class GameController {
             if (guess != null) {
                 try {
                     System.out.println("Criando response");
-                    GuessResponseDTO response = playerManager.getPlayer().verifyGuess(guess);
+                    GuessResponse response = playerManager.getPlayer().verifyGuess(guess);
                     if (response != null) {
                         System.out.println("Formatando resposta no Painel");
                         wordPanel.formatResponse(response);
+                        if(!player.getGameSession().hasAttempts()){
+                            Navigation.loadGameScore();
+                        }
                     } else {
                         System.out.println("Palavra não reconhecida.");
                         wordPanel.rollBack();
-                        lb_invalid_response.setVisible(true);
+                        lb_invalid_word.setVisible(true);
                     }
                 } catch (RemoteException e) {
                     System.out.println("Erro ao enviar palpite." + e.getMessage());
                 }
             }
         } else {
-            lb_invalid_response.setVisible(false);
+            lb_invalid_word.setVisible(false);
             wordPanel.command(command);
         }
     }

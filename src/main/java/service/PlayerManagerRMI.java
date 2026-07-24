@@ -2,6 +2,8 @@ package service;
 
 import client.Player;
 
+import java.rmi.RemoteException;
+
 /**
  *
  * @author Sérgio Lopes Júnior
@@ -22,7 +24,7 @@ public class PlayerManagerRMI {
         return instance;
     }
 
-    public boolean connect(String username, String host, int port) {
+    public boolean connect(String username, String host, int port) throws RemoteException{
         try {
             if (isConnected) {
                 disconnect();
@@ -30,16 +32,16 @@ public class PlayerManagerRMI {
             player = new Player(username);
             isConnected = true;
             return true;
-        } catch (Exception e) {
-            System.err.println("Falha na conexão RMI: " + e.getMessage());
+        } catch (RemoteException e) {
             isConnected = false;
-            return false;
+            throw new RemoteException(e.getMessage());
         }
     }
 
     public void disconnect() {
         try {
             if (player != null) {
+                player.disconnect();
                 player = null;
             }
             isConnected = false;
