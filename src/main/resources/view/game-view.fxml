@@ -6,19 +6,32 @@
 <?import javafx.scene.text.*?>
 
 <VBox fx:id="vb_main" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GameController">
-      <Label text="Criptex" textAlignment="CENTER">
+   <StackPane alignment="TOP_CENTER">
+            <Label text="Criptex" textAlignment="CENTER" StackPane.alignment="TOP_CENTER">
+               <font>
+                  <Font size="23.0" />
+               </font>
+         <StackPane.margin>
+            <Insets bottom="30.0" top="20.0" />
+         </StackPane.margin>
+         </Label>
+         <Label fx:id="lbl_stopwatch" alignment="TOP_RIGHT" contentDisplay="RIGHT" text="0:00" textFill="RED" StackPane.alignment="TOP_RIGHT">
+         <StackPane.margin>
+            <Insets right="20.0" top="20.0" />
+         </StackPane.margin>
          <font>
-            <Font size="23.0" />
-         </font>
-      <VBox.margin>
-         <Insets bottom="50.0" />
-      </VBox.margin></Label>
+            <Font name="System Bold" size="16.0" />
+         </font></Label>
+      <StackPane.margin>
+         <Insets right="20.0" />
+      </StackPane.margin>
+   </StackPane>
+
       <GridPane fx:id="gp_attempts" alignment="TOP_CENTER">
       <VBox.margin>
          <Insets bottom="30.0" />
       </VBox.margin></GridPane>
-   <Label fx:id="lb_invalid_word" alignment="CENTER" contentDisplay="CENTER"
-          text="palavra inválida" textFill="#909090" visible="false">
+   <Label fx:id="lb_invalid_word" alignment="CENTER" contentDisplay="CENTER" text="palavra inválida" textFill="#909090" visible="false">
       <font>
          <Font name="System Bold" size="22.0" />
       </font>

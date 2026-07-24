@@ -1,6 +1,7 @@
 package controller;
 
 import javafx.scene.control.Label;
+import ui.component.TimeCounter;
 import view.manager.Navigation;
 import ui.component.WordPanel;
 import shared.dto.GuessResponse;
@@ -30,11 +31,12 @@ public class GameController {
     public GridPane gp_attempts;
     public VBox vb_keyboard;
     @FXML
-    public Label lb_invalid_word;
+    public Label lb_invalid_word, lbl_stopwatch;
 
     private GameSession gameSession;
     private final KeyboardBuilder keyboard = new KeyboardBuilder();
     private final WordPanel wordPanel = new WordPanel();
+    private TimeCounter stopwatch;
 
     public void setGameSession(GameSession gameSession){
         this.gameSession = gameSession;
@@ -42,6 +44,9 @@ public class GameController {
 
     @FXML
     public void initialize(){
+        stopwatch = new TimeCounter(lbl_stopwatch);
+        stopwatch.start();
+
         gp_attempts.getChildren().add((wordPanel.createWordPanel()));
 
         keyboard.setOnKeyPress(this::processCommand);
