@@ -5,14 +5,14 @@ import javafx.animation.Timeline;
 import javafx.scene.control.Label;
 import javafx.util.Duration;
 
-public class TimeCounter {
+public class Stopwatch {
 
     private final Timeline timeCounter;
     private final Label stopwatch;
     private int secondsCounting = 0;
 
 
-    public TimeCounter(Label label) {
+    public Stopwatch(Label label) {
         this.timeCounter = new Timeline();
         this.stopwatch = label;
 

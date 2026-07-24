@@ -1,7 +1,7 @@
 package controller;
 
 import javafx.scene.control.Label;
-import ui.component.TimeCounter;
+import ui.component.Stopwatch;
 import view.manager.Navigation;
 import ui.component.WordPanel;
 import shared.dto.GuessResponse;
@@ -36,7 +36,7 @@ public class GameController {
     private GameSession gameSession;
     private final KeyboardBuilder keyboard = new KeyboardBuilder();
     private final WordPanel wordPanel = new WordPanel();
-    private TimeCounter stopwatch;
+    private Stopwatch stopwatch;
 
     public void setGameSession(GameSession gameSession){
         this.gameSession = gameSession;
@@ -44,7 +44,7 @@ public class GameController {
 
     @FXML
     public void initialize(){
-        stopwatch = new TimeCounter(lbl_stopwatch);
+        stopwatch = new Stopwatch(lbl_stopwatch);
         stopwatch.start();
 
         gp_attempts.getChildren().add((wordPanel.createWordPanel()));
