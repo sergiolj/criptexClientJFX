@@ -35,4 +35,8 @@ public class Stopwatch {
         int seconds = secondsCounting % 60;
         stopwatch.setText(String.format("%02d:%02d", minutes,seconds));
     }
+
+    public void stop(){
+        timeCounter.stop();
+    }
 }

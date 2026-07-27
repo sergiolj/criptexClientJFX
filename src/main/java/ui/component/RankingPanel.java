@@ -16,22 +16,22 @@ public class RankingPanel {
         for (int row = 0; row < 10; row++) {
 
             StackPane cellName = new StackPane();
-            cellName.getStyleClass().add("cell_player");
+            cellName.getStyleClass().add("ranking_cell_player");
 
             String n = rankingList.get(row).name();
             Text playerName = new Text(n);
-            playerName.getStyleClass().add("name");
+            playerName.getStyleClass().add("ranking_player");
 
             cellName.getChildren().add(playerName);
 
             gridPane.add(cellName, 0, row);
 
             StackPane cellTime = new StackPane();
-            cellName.getStyleClass().add("cell_time");
+            cellName.getStyleClass().add("ranking_cell_time");
 
             String t = rankingList.get(row).getElapsedTime();
             Text time = new Text(t);
-            time.getStyleClass().add("time");
+            time.getStyleClass().add("ranking_time");
 
             cellTime.getChildren().add(time);
 

@@ -85,6 +85,9 @@ public class GameController {
                     System.out.println("Criando response");
                     GuessResponse response = gameSession.verifyGuess(guess);
                     if (response != null) {
+                        if(response.isWordMatch()){
+                            stopwatch.stop();
+                        }
                         System.out.println("Formatando resposta no Painel");
                         wordPanel.formatResponse(response);
                     } else {
