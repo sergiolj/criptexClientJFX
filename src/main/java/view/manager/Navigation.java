@@ -1,14 +1,18 @@
 package view.manager;
 
 import controller.GameController;
+import controller.RankingController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import rmi.network.GameSession;
+import shared.remote.Ranking;
+import ui.component.RankingPanel;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -89,8 +93,8 @@ public class Navigation {
         }
     }
 
-    public static void loadGameScore(){
-        String fxml = "/view/game-score.fxml";
+    public static void loadGameScore(List<Ranking> rankingList){
+        String fxml = "/view/game-ranking.fxml";
         String title = "Criptex Score";
         double width = 300;
         double height = 450;
@@ -98,6 +102,8 @@ public class Navigation {
             FXMLLoader loader = loadFXML(fxml);
 
             Parent root = loader.load();
+            RankingController controller = loader.getController();
+            controller.setRanking(rankingList);
 
             setupScene(root,title,width,height);
 

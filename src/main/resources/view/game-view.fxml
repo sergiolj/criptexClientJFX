@@ -27,7 +27,7 @@
       </StackPane.margin>
    </StackPane>
 
-      <GridPane fx:id="gp_attempts" alignment="TOP_CENTER">
+      <GridPane fx:id="gp_word_panel" alignment="TOP_CENTER">
       <VBox.margin>
          <Insets bottom="30.0" />
       </VBox.margin></GridPane>

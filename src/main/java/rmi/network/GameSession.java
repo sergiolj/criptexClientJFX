@@ -4,6 +4,7 @@ import model.Player;
 import shared.config.Config;
 import shared.dto.GuessRequest;
 import shared.dto.GuessResponse;
+import shared.remote.Ranking;
 import shared.remote.ServerInterface;
 
 import java.io.Serial;
@@ -13,17 +14,16 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.time.Instant;
+import java.util.List;
 
 
 /**
  *
  * Deve armazenar as informações do jogo como tentativas e tempo decorrido.
  *
- * @author Bruna Brito Muniz Filgueiras
- * @author Laís de Assis Doria da Silva
  * @author Sérgio Lopes Júnior
  *
- * @version 1.0
+ * @version 2.0
  */
 public class GameSession implements Serializable {
     @Serial
@@ -45,35 +45,7 @@ public class GameSession implements Serializable {
         return instance;
     }
 
-    public GuessResponse verifyGuess(String guess) throws RemoteException {
-        if (noAttemptsLeft()) {
-            System.out.println(this.player.getName() + " | " + startTime);
-            System.out.println("Você não possui mais tentativas.");
-            return null;
-        }
-        System.out.println("Tentativas registradas " + attempt);
-
-        GuessRequest request = new GuessRequest(player.getUuid(), guess);
-        GuessResponse response = this.proxy.verifyGuess(request);
-        if (response != null) {
-            registerAttempt();
-
-            GuessResponse responseWithAttempt = new GuessResponse(
-                    response.getStatus(),
-                    response.getGuess(),
-                    response.isWordMatch(),
-                    getAttempt()
-            );
-
-            System.out.println("Tentativa registrada! " + attempt);
-            if (responseWithAttempt.isWordMatch()) {
-                player.updateScore();
-            }
-
-            return responseWithAttempt;
-        }
-        return null;
-    }
+    private GameSession(){}
 
     public void connect(Player player) throws RemoteException {
         try {
@@ -108,7 +80,35 @@ public class GameSession implements Serializable {
         }
     }
 
-    private GameSession(){}
+    public GuessResponse verifyGuess(String guess) throws RemoteException {
+        if (noAttemptsLeft()) {
+            System.out.println(this.player.getName() + " | " + startTime);
+            System.out.println("Você não possui mais tentativas.");
+            return null;
+        }
+        System.out.println("Tentativas registradas " + attempt);
+
+        GuessRequest request = new GuessRequest(player.getUuid(), guess);
+        GuessResponse response = this.proxy.verifyGuess(request);
+        if (response != null) {
+            registerAttempt();
+
+            GuessResponse responseWithAttempt = new GuessResponse(
+                    response.getStatus(),
+                    response.getGuess(),
+                    response.isWordMatch(),
+                    getAttempt()
+            );
+
+            System.out.println("Tentativa registrada! " + attempt);
+            if (responseWithAttempt.isWordMatch()) {
+                player.updateScore();
+            }
+
+            return responseWithAttempt;
+        }
+        return null;
+    }
 
     public void registerAttempt() {
         attempt++;
@@ -123,6 +123,9 @@ public class GameSession implements Serializable {
         return attempt >= maxAttempts;
     }
 
+    public List<Ranking> getRanking() throws RemoteException {
+        return proxy.getRanking();
+    }
 
     public Player getPlayer() {
         return player;

@@ -1,7 +1,9 @@
 package controller;
 
 import javafx.scene.control.Label;
+import shared.remote.Ranking;
 import ui.component.Stopwatch;
+import util.AlertWindow;
 import view.manager.Navigation;
 import ui.component.WordPanel;
 import shared.dto.GuessResponse;
@@ -15,7 +17,9 @@ import javafx.scene.layout.GridPane;
 
 import javafx.scene.layout.VBox;
 
+import java.awt.event.ActionEvent;
 import java.rmi.RemoteException;
+import java.util.List;
 
 /**
  *
@@ -28,7 +32,7 @@ public class GameController {
     @FXML
     public VBox vb_main;
     @FXML
-    public GridPane gp_attempts;
+    public GridPane gp_word_panel;
     public VBox vb_keyboard;
     @FXML
     public Label lb_invalid_word, lbl_stopwatch;
@@ -47,7 +51,7 @@ public class GameController {
         stopwatch = new Stopwatch(lbl_stopwatch);
         stopwatch.start();
 
-        gp_attempts.getChildren().add((wordPanel.createWordPanel()));
+        gp_word_panel.getChildren().add((wordPanel.createWordPanel()));
 
         keyboard.setOnKeyPress(this::processCommand);
 
@@ -61,7 +65,20 @@ public class GameController {
             String guess = wordPanel.command("ENTER");
             System.out.println("Palavra retornada " + guess);
             if (gameSession.noAttemptsLeft()) {
-                Navigation.loadGameScore();
+                    try{
+                        GameSession gameSession = GameSession.getInstance();
+                        List<Ranking> rankingList = gameSession.getRanking();
+                        gameSession.disconnect();
+
+                        Navigation.loadGameScore(rankingList);
+                    }catch (RemoteException e){
+
+                        AlertWindow.showError("Erro ao desconectar jogador",
+                                "Falha ao tentar se comunicar com o servidor: " + e.getMessage(),
+                                null);
+
+                        //Verificar como criar evento para atrelar a Scene
+                    }
             }
             if (guess != null) {
                 try {
