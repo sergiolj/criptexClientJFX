@@ -1,15 +1,20 @@
 package controller;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import shared.remote.Ranking;
 import ui.component.RankingPanel;
 import view.manager.Navigation;
-
 import java.util.List;
 
+/**
+ * Controller da View que apresenta a listagem dos 10 jogadores mais rápidos para descobrir a palavra secreta.
+ *
+ * @author Sérgio Lopes Júnior
+ *
+ * @version 1.0
+ */
 public class RankingController {
     @FXML
     public GridPane gp_score;

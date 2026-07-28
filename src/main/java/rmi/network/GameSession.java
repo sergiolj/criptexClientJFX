@@ -13,13 +13,13 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.time.Instant;
 import java.util.List;
 
 
 /**
  *
- * Deve armazenar as informações do jogo como tentativas e tempo decorrido.
+ * Deve armazenar as informações do jogo como tentativas e tempo decorrido além de gerenciar a conexão e comunicações
+ * entre o servidor e cliente.
  *
  * @author Sérgio Lopes Júnior
  *
@@ -33,6 +33,7 @@ public class GameSession implements Serializable {
     private int attempt = 0;
     private Player player;
     private boolean isConnected = false;
+    private boolean wordMatch = false;
     private ServerInterface proxy;
 
 
@@ -101,7 +102,7 @@ public class GameSession implements Serializable {
             System.out.println("Tentativa registrada! " + attempt);
             if (responseWithAttempt.isWordMatch()) {
                 player.updateScore();
-                attempt = 6;
+                wordMatch = true;
             }
 
             return responseWithAttempt;
@@ -132,5 +133,9 @@ public class GameSession implements Serializable {
 
     public boolean isConnected() {
         return isConnected;
+    }
+
+    public boolean isWordMatch(){
+        return wordMatch;
     }
 }

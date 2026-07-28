@@ -7,6 +7,13 @@ import shared.remote.Ranking;
 
 import java.util.List;
 
+/**
+ * Componente de interface para criação do GridPane com os melhores jogadores.
+ *
+ * @author Sérgio Lopes Júnior
+ *
+ * @version 1.0
+ */
 public class RankingPanel {
 
     public static GridPane create(List<Ranking> rankingList) {

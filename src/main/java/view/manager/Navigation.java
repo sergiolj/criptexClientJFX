@@ -16,10 +16,11 @@ import java.util.List;
 import java.util.Objects;
 
 /**
+ * Classe responsável pela definição das Scenes.
  *
  * @author Sérgio Lopes Júnior
  *
- * @version 1.0
+ * @version 2.0
  */
 public class Navigation {
     private static Stage stage;

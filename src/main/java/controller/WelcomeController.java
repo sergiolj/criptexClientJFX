@@ -18,6 +18,7 @@ import java.rmi.RemoteException;
 import java.util.Objects;
 
 /**
+ * Controller da View de início do app com a apresentação das regras e o botão de início do jogo.
  *
  * @author Sérgio Lopes Júnior
  *
@@ -53,11 +54,11 @@ public class WelcomeController {
             }catch (ConnectException e){
                 AlertWindow.showError("Conexão recusada",
                         "Não foi possível conectar com o servidor em " + Config.IP_ADDRESS,
-                        event);
+                        btn_start);
             }catch (RemoteException e){
                 AlertWindow.showError("Erro de comunicação",
                         "Falha ao tentar se comunicar com o servidor: " + e.getMessage(),
-                        event);
+                        btn_start);
             }
         });
     }

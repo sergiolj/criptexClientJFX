@@ -1,6 +1,5 @@
 package util;
 
-import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -18,39 +17,52 @@ import javafx.stage.Window;
 import java.util.Objects;
 
     /**
-     *
+     * Classe utilitária para popups com mensagens de exceções, alertas e confirmações.
+     * Pode ser utilizada injetando uma Window ou Node para definir a janela dona da janela de alerta.
+     * Caso o acionador da janela seja regra de negócio sem relação com elementos gráficos de tela pode ser utilizada
+     * sem Node ou Window.
      *
      * @author Sérgio Lopes Júnior
      *
-     * @version 1.0
+     * @version 2.0
      */
     public class AlertWindow {
 
-        private static void showAlert(Alert.AlertType type, String tittle, String message, ActionEvent event){
+        private static void showAlert(Alert.AlertType type, String tittle, String message, Window owner){
             Alert alert = new Alert(type);
             alert.setTitle(tittle);
             alert.setHeaderText(null);
             alert.setContentText(message);
-            if(event != null){
-                Node node = (Node) event.getSource();
-                Window owner = node.getScene().getWindow();
                 if (owner != null) {
                     alert.initOwner(owner);
                 }
-            }
             alert.showAndWait();
         }
 
-        public static void showWarning(String title, String message, ActionEvent event) {
-            showAlert(Alert.AlertType.WARNING, title,message,event);
+        public static void showWarning(String title, String message, Window owner) {
+            showAlert(Alert.AlertType.WARNING, title,message,owner);
         }
 
-        public static void showError(String tittle, String message, ActionEvent event) {
-            showAlert(Alert.AlertType.ERROR, tittle,message,event);
+        public static void showError(String tittle, String message, Node node) {
+            Window owner = (node != null && node.getScene() !=null) ?
+                    node.getScene().getWindow() : null;
+            showAlert(Alert.AlertType.ERROR, tittle,message,owner);
         }
 
-        public static void showConfirmation(String tittle, String message,ActionEvent event) {
-            showAlert(Alert.AlertType.CONFIRMATION,tittle,message,event);
+        public static void showError(String tittle, String message, Window owner) {
+            showAlert(Alert.AlertType.ERROR, tittle,message, owner);
+        }
+
+        public static void showErrorWithoutNode(String tittle, String message){
+            Window owner = Window.getWindows().stream()
+                    .filter(Window::isFocused)
+                    .findFirst()
+                    .orElse(null);
+            showAlert(Alert.AlertType.ERROR, tittle,message,owner);
+        }
+
+        public static void showConfirmation(String tittle, String message,Window owner) {
+            showAlert(Alert.AlertType.CONFIRMATION,tittle,message,owner);
         }
 
         private static void applyCustomCSS(Alert alert) {

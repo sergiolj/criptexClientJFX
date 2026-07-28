@@ -8,6 +8,7 @@ import javafx.scene.layout.VBox;
 import java.util.function.Consumer;
 
 /**
+ * Componente de interface do teclado virtual.
  *
  * @author Sérgio Lopes Júnior
  *
@@ -43,6 +44,7 @@ public class KeyboardBuilder {
                 Button btn = new Button(letter);
                 //Impede que o ENTER do teclado seja usado para enviar uma tecla selecionada.
                 btn.setFocusTraversable(false);
+
                 btn.getStyleClass().add("common");
                 btn.setPrefSize(40, 40);
                 btn.setOnAction(event -> actionEvent(letter));

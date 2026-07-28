@@ -5,12 +5,18 @@ import javafx.animation.Timeline;
 import javafx.scene.control.Label;
 import javafx.util.Duration;
 
+/**
+ * Componente de interface com cronômetro.
+ *
+ * @author Sérgio Lopes Júnior
+ *
+ * @version 1.0
+ */
 public class Stopwatch {
 
     private final Timeline timeCounter;
     private final Label stopwatch;
     private int secondsCounting = 0;
-
 
     public Stopwatch(Label label) {
         this.timeCounter = new Timeline();

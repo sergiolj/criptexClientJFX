@@ -17,11 +17,13 @@ import javafx.scene.layout.GridPane;
 
 import javafx.scene.layout.VBox;
 
-import java.awt.event.ActionEvent;
 import java.rmi.RemoteException;
 import java.util.List;
 
 /**
+ * Controller da View principal do jogo com a lista de palavras. Essa controller coordena a comunicação entre os
+ * objetos GameSession, que controla a sessão de jogo e a conexão com o servidor RMI e o objeto WordPanel que controla a
+ * lista de palavras.
  *
  * @author Sérgio Lopes Júnior
  *
@@ -62,9 +64,7 @@ public class GameController {
 
     private void processCommand(String command) {
         if (command.equals("ENTER")) {
-            String guess = wordPanel.command("ENTER");
-            System.out.println("Palavra retornada " + guess);
-            if (gameSession.noAttemptsLeft()) {
+            if (gameSession.noAttemptsLeft() || gameSession.isWordMatch()) {
                     try{
                         GameSession gameSession = GameSession.getInstance();
                         List<Ranking> rankingList = gameSession.getRanking();
@@ -72,14 +72,12 @@ public class GameController {
 
                         Navigation.loadGameScore(rankingList);
                     }catch (RemoteException e){
-
-                        AlertWindow.showError("Erro ao desconectar jogador",
-                                "Falha ao tentar se comunicar com o servidor: " + e.getMessage(),
-                                null);
-
-                        //Verificar como criar evento para atrelar a Scene
+                        AlertWindow.showErrorWithoutNode("Erro ao desconectar jogador",
+                                "Falha ao tentar se comunicar com o servidor: " + e.getMessage());
                     }
             }
+            String guess = wordPanel.command("ENTER");
+            System.out.println("Palavra retornada " + guess);
             if (guess != null) {
                 try {
                     System.out.println("Criando response");
