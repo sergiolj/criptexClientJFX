@@ -105,16 +105,25 @@ public class WordPanel {
         int responseRow = currentRow -1;
         int [] status = response.getStatus();
 
+        Animation play = new Animation();
         for (int i = 0; i < 5; i++) {
-            backgroundCells[responseRow][i].getStyleClass()
-                    .remove(StatusLetter.EMPTY.getCssClass());
+
+            StackPane currentCell = backgroundCells[responseRow][i];
+            currentCell.getStyleClass().remove(StatusLetter.EMPTY.getCssClass());
+
             switch (status[i]){
-                case 0 -> backgroundCells[responseRow][i].getStyleClass()
-                        .add(StatusLetter.NON_EXISTENT.getCssClass());
-                case 1 -> backgroundCells[responseRow][i].getStyleClass()
-                        .add(StatusLetter.WRONG_PLACE.getCssClass());
-                case 2 -> backgroundCells[responseRow][i].getStyleClass()
-                        .add(StatusLetter.RIGHT.getCssClass());
+                case 0 -> {
+                    currentCell.getStyleClass().add(StatusLetter.NON_EXISTENT.getCssClass());
+                    play.flip(currentCell);
+                }
+                case 1 -> {
+                    currentCell.getStyleClass().add(StatusLetter.WRONG_PLACE.getCssClass());
+                    play.flip(currentCell);
+                }
+                case 2 -> {
+                    currentCell.getStyleClass().add(StatusLetter.RIGHT.getCssClass());
+                    play.flip(currentCell);
+                }
             }
         }
     }

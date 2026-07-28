@@ -1,7 +1,9 @@
 package controller;
 
 import javafx.scene.control.Label;
+import javafx.util.Duration;
 import shared.remote.Ranking;
+import ui.component.Animation;
 import ui.component.Stopwatch;
 import util.AlertWindow;
 import view.manager.Navigation;
@@ -99,6 +101,7 @@ public class GameController {
             }
         } else {
             lb_invalid_word.setVisible(false);
+            Animation.blink(lb_invalid_word);
             wordPanel.command(command);
         }
     }
