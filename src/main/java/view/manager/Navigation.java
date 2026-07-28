@@ -68,8 +68,8 @@ public class Navigation {
 
             setupScene(root,title,width,height);
 
-            root.setStyle("-fx-background-color: " +
-                    "linear-gradient(from 0% 0% to 100% 100%, #0a0f1e 0%, #3c3f4a 50%, #000000 100%)");
+            root.getStyleClass().add("welcome");
+
             stage.show();
         } catch (IOException e) {
             throw new RuntimeException(e);

@@ -44,7 +44,7 @@ public class WelcomeController {
         txf_username.getStyleClass().add("text_field");
         txf_username.setMinHeight(50);
 
-        btn_start.getStyleClass().add("common");
+        btn_start.getStyleClass().add("welcome");
         btn_start.setMinWidth(120);
         btn_start.setMaxHeight(30);
 
