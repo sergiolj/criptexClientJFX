@@ -21,6 +21,7 @@ public class Stopwatch {
     public Stopwatch(Label label) {
         this.timeCounter = new Timeline();
         this.stopwatch = label;
+        label.getStyleClass().add("stopwatch");
 
         this.timeCounter.setCycleCount(Timeline.INDEFINITE);
 

@@ -42,6 +42,7 @@ public class KeyboardBuilder {
             for (char label : keyboardLines[i].toCharArray()) {
                 String letter = String.valueOf(label);
                 Button btn = new Button(letter);
+
                 //Impede que o ENTER do teclado seja usado para enviar uma tecla selecionada.
                 btn.setFocusTraversable(false);
 
@@ -53,6 +54,7 @@ public class KeyboardBuilder {
             if (i == 0) {
                 Button btn = new Button("DELETE");
                 btn.setFocusTraversable(false);
+                btn.getStyleClass().add("common");
                 btn.getStyleClass().add("delete");
                 btn.setPrefSize(80, 40);
                 btn.setOnAction(event -> actionEvent("DELETE"));
@@ -61,6 +63,7 @@ public class KeyboardBuilder {
             } else if (i == 2) {
                 Button btn = new Button("ENTER");
                 btn.setFocusTraversable(false);
+                btn.getStyleClass().add("common");
                 btn.getStyleClass().add("enter");
                 btn.setPrefSize(80, 40);
                 btn.setOnAction(event -> actionEvent("ENTER"));

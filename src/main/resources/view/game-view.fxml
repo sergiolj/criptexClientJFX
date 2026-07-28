@@ -29,14 +29,14 @@
 
       <GridPane fx:id="gp_word_panel" alignment="TOP_CENTER">
       <VBox.margin>
-         <Insets bottom="30.0" />
+         <Insets bottom="20.0" />
       </VBox.margin></GridPane>
    <Label fx:id="lb_invalid_word" alignment="CENTER" contentDisplay="CENTER" text="palavra inválida" textFill="#909090" visible="false">
       <font>
          <Font name="System Bold" size="22.0" />
       </font>
       <VBox.margin>
-         <Insets bottom="30.0" />
+         <Insets bottom="20.0" />
       </VBox.margin>
    </Label>
 

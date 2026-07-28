@@ -31,18 +31,42 @@
     -fx-border-color: transparent;
 }
 
+
+.common{
+    -fx-background-color: #d3d6da;
+    -fx-background-radius: 6;
+    -fx-padding: 15 10 15 10;
+    -fx-cursor: hand;
+
+
+    -fx-font-family: "Helvetica Neue", "Arial", sans-serif;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1a1a1b;
+
+
+    -fx-transition: -fx-background-color 0.2s ease;
+}
+
+.common:hover {
+    -fx-background-color: #c3c6ca;
+}
+
 .delete{
-    -fx-border-color: transparent;
-    -fx-font-weight: bold ;
-    -fx-text-fill: #ed5252;
-    -fx-font-size: 15px;
+    -fx-background-color: #f19898;
+    -fx-text-fill: #1a1a1b;
 }
 
 .enter{
-    -fx-border-color: transparent;
-    -fx-font-weight: bold ;
-    -fx-text-fill: #375c38;
-    -fx-font-size: 15px;
+    -fx-background-color: #adcafd;
+    -fx-text-fill: #1a1a1b;
+
+}
+
+.common:pressed {
+    -fx-background-color: #999c9e;
+    -fx-scale-x: 0.95; /* Efeito tátil sutil de "afundar" a tecla */
+    -fx-scale-y: 0.95;
 }
 
 .ranking_cell_player{
@@ -56,4 +80,18 @@
 }
 .ranking_time{
 
+}
+
+.stopwatch{
+    -fx-font-family: "Press Start 2P";
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ececec;
+    -fx-effect: dropshadow(two-pass-box, #6e6e6e, 2, 0.2, 0, 0);
+}
+
+.text-field{
+    -fx-font-family: "Helvetica Neue", "Arial", sans-serif;
+    -fx-font-size: 23px;
+    -fx-font-weight: bold;
 }

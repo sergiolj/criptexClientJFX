@@ -5,6 +5,7 @@ import controller.RankingController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import rmi.network.GameSession;
 import shared.remote.Ranking;
@@ -31,9 +32,10 @@ public class Navigation {
 
     private static void setupScene(Parent root, String title, double width, double height){
         Scene scene = new Scene(root, width, height);
-        stage.setScene(scene);
         scene.getStylesheets().add(Objects.requireNonNull(
                 Navigation.class.getResource("/styles/styles.css")).toExternalForm());
+        Font.loadFont(Navigation.class.getResourceAsStream("/fonts/PressStart2P-Regular.ttf"), 14);
+        stage.setScene(scene);
         stage.setTitle(title);
         stage.centerOnScreen();
         stage.sizeToScene();

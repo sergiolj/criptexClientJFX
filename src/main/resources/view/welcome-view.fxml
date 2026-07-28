@@ -5,11 +5,12 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.WelcomeController">
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="controller.WelcomeController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
    <ImageView fx:id="img_logo" preserveRatio="true" />
    <TextField fx:id="txf_username" alignment="CENTER" promptText="USERNAME" />
-    <Button fx:id="btn_start" text="Iniciar o Jogo!" />
+    <Button fx:id="btn_start" text="Jogar" />
 </VBox>

@@ -41,9 +41,16 @@ public class WelcomeController {
         img_logo.setImage(logo);
         img_logo.setFitWidth(370);
 
+        txf_username.getStyleClass().add("text_field");
+        txf_username.setMinHeight(50);
+
+        btn_start.getStyleClass().add("common");
+        btn_start.setMinWidth(120);
+        btn_start.setMaxHeight(30);
+
         btn_start.setOnAction((event) -> {
             String username = txf_username.getText().isBlank() ?
-                    "Anonymous" : txf_username.getText();
+                    "ANONYMOUS" : txf_username.getText().toUpperCase();
 
             Player player = new Player(username);
 
