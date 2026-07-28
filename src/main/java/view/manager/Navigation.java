@@ -9,7 +9,6 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import rmi.network.GameSession;
 import shared.remote.Ranking;
-import ui.component.RankingPanel;
 
 import java.io.IOException;
 import java.net.URL;
@@ -34,6 +33,7 @@ public class Navigation {
         Scene scene = new Scene(root, width, height);
         scene.getStylesheets().add(Objects.requireNonNull(
                 Navigation.class.getResource("/styles/styles.css")).toExternalForm());
+
         Font.loadFont(Navigation.class.getResourceAsStream("/fonts/PressStart2P-Regular.ttf"), 14);
         stage.setScene(scene);
         stage.setTitle(title);
