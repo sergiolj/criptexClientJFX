@@ -4,10 +4,14 @@ module criptex{
     requires java.rmi;
     requires java.desktop;
     requires java.sql;
+    requires jdk.security.auth;
 
 
     exports criptex;
     opens criptex to javafx.fxml;
+
+    exports shared.config;
+    opens shared.config to javafx.fxml;
 
     exports shared.remote;
     opens shared.remote to javafx.fxml;

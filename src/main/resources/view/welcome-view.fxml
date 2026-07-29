@@ -5,27 +5,19 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.WelcomeController">
+<BorderPane styleClass="my-stage"
+        xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.WelcomeController">
     <top>
         <MenuBar fx:id="mb_main">
             <Menu mnemonicParsing="false" text="Arquivo">
-                <MenuItem mnemonicParsing="false" text="Config" />
-                <MenuItem mnemonicParsing="false" text="Sair" />
+                <MenuItem mnemonicParsing="false" text="Config" onAction="#configServer" />
+                <MenuItem mnemonicParsing="false" text="Sair" onAction="#exitApp" />
             </Menu>
             <Menu mnemonicParsing="false" text="Ajuda">
                 <MenuItem mnemonicParsing="false" text="Regras" />
                 <MenuItem mnemonicParsing="false" text="Sobre" />
             </Menu>
         </MenuBar>
-        <!--
-        <top>
-            <HBox>
-                <ImageView fx:id="img_reload" preserveRatio="true" />
-                <ImageView fx:id="img_settings" preserveRatio="true" />
-                <ImageView fx:id="img_information" preserveRatio="true" />
-            </HBox>
-        </top>
-        -->
     </top>
     <center>
         <VBox alignment="CENTER">

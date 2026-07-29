@@ -7,8 +7,10 @@ import shared.dto.GuessResponse;
 import shared.remote.Ranking;
 import shared.remote.ServerInterface;
 
+import java.io.IOException;
 import java.io.Serial;
 import java.io.Serializable;
+import java.nio.file.Paths;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -46,6 +48,7 @@ public class GameSession implements Serializable {
 
     private GameSession(){}
 
+
     public void connect(Player player) throws RemoteException {
         try {
             if (isConnected) {
@@ -54,8 +57,9 @@ public class GameSession implements Serializable {
 
             this.player = player;
             try {
-                Registry registry = LocateRegistry.getRegistry(Config.IP_ADDRESS, Config.SERVER_PORT);
-                this.proxy = (ServerInterface) registry.lookup(Config.SERVER_NAME);
+                Config config = Config.getInstance();
+                Registry registry = LocateRegistry.getRegistry(config.getIpAddress(), config.getServerPort());
+                this.proxy = (ServerInterface) registry.lookup(config.getServerName());
                 this.proxy.loginUser(player);
             } catch (NotBoundException e) {
                 throw new RuntimeException(e);
@@ -138,4 +142,6 @@ public class GameSession implements Serializable {
     public boolean isWordMatch(){
         return wordMatch;
     }
+
+
 }

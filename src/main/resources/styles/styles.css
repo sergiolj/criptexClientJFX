@@ -1,3 +1,7 @@
+.my-stage {
+    -fx-background: linear-gradient(to top, #313640 0%, #04041b 100%);
+}
+
 .panelLetter{
     -fx-font-size: 30px;
     -fx-font-weight: bold;

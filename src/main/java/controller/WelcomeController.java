@@ -1,6 +1,7 @@
 package controller;
 
 
+import javafx.event.ActionEvent;
 import javafx.scene.control.MenuBar;
 import model.Player;
 import javafx.scene.image.Image;
@@ -14,6 +15,7 @@ import shared.config.Config;
 import rmi.network.GameSession;
 import util.AlertWindow;
 
+import java.io.IOException;
 import java.rmi.ConnectException;
 import java.rmi.RemoteException;
 import java.util.Objects;
@@ -36,13 +38,14 @@ public class WelcomeController {
     @FXML
     public MenuBar mb_main;
 
+
     @FXML
     public void initialize() {
         Image logo = new Image(Objects.requireNonNull(getClass()
                 .getResourceAsStream("/img/criptex_medium.png")));
 
         img_logo.setImage(logo);
-        img_logo.setFitWidth(240);
+        img_logo.setFitWidth(280);
 
         txf_username.getStyleClass().add("text_field");
         txf_username.setFocusTraversable(false);
@@ -63,12 +66,17 @@ public class WelcomeController {
                 gameSession.connect(player);
                 Navigation.loadGameView(gameSession);
             }catch (ConnectException e){
-                AlertWindow.showError("Conexão recusada",
-                        "Não foi possível conectar com o servidor em " + Config.IP_ADDRESS,
+                AlertWindow.showError("Conexão recusada - Connection Exception",
+                        "Ocorreu um problema ao conectar ao servidor " + Config.getInstance().getServerName() +
+                                " no domínio " + Config.getInstance().getIpAddress()+
+                        " | " + Config.getInstance().getServerPort(),
                         btn_start);
             }catch (RemoteException e){
-                AlertWindow.showError("Erro de comunicação",
-                        "Falha ao tentar se comunicar com o servidor: " + e.getMessage(),
+                AlertWindow.showError("Erro de comunicação - Remote Exception",
+                        "Não foi possível estabelecer conexão com o servidor " + Config.getInstance().getServerName() +
+                                " no domínio " + Config.getInstance().getIpAddress()+
+                                " | " + Config.getInstance().getServerPort() +
+                                "\nVerifique o arquivo conf.cfg",
                         btn_start);
             }
         });
@@ -87,5 +95,17 @@ public class WelcomeController {
         img_information.setFitWidth(30);
         img_settings.setImage(settings);
         img_settings.setFitWidth(30);
+    }
+
+    public void exitApp(ActionEvent actionEvent) {
+        System.exit(0);
+    }
+
+    public void configServer(ActionEvent actionEvent) {
+        AlertWindow.showConfirmationWithoutNode("Configuração do Servidor RMI",
+                "Server Name: " + Config.getInstance().getServerName() +
+                        "\nServidor Ip: " + Config.getInstance().getIpAddress() +
+                        "\nPorta: " + Config.getInstance().getServerPort());
+
     }
 }

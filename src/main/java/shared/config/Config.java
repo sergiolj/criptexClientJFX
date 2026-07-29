@@ -1,5 +1,16 @@
 package shared.config;
 
+import com.sun.security.auth.login.ConfigFile;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+
 /**
  * Classe que define a configuração do servidor RMI.
  * Essas configurações serão usadas para determinar os parâmetros de inicialização do servidor e do cliente, mantendo o
@@ -13,15 +24,80 @@ package shared.config;
  * @version 1.0
  */
 public class Config {
-    /** Nome único do serviço registrado no RMI Registry. */
-    public static final String SERVER_NAME ="CRIPTEX_RMI";
 
-    /** Porta padrão usada para o registro RMI. */
-    public static final Integer SERVER_PORT =1099;
+    private static Config instance;
 
-    /** Endereço IP do servidor que será usado na configuração do Client.
-     * Para fins de teste é possível usar o localhost, pois tanto servidor quanto cliente estarão
-     * na mesma máquina.
-     */
-    public static final String IP_ADDRESS = "127.0.0.1";
+    private final String serverName = "CRIPTEX_RMI";
+    private Integer serverPort;
+    private String ipAddress;
+
+    private final File configFile = new File("conf.cfg");
+    private long lastModifiedTime = 0;
+
+    private Config() throws IOException{
+        if(!configFile.exists()){
+            saveConfigToDisk("127.0.0.0", 1099);
+        }
+            updateData();
+    }
+
+    private void saveConfigToDisk(String ipAddress, int serverPort) throws IOException {
+        String server = ipAddress + ";" + serverPort;
+        Files.writeString(configFile.toPath(), server,
+                StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+    }
+
+    private void checkFileChanges() {
+        if(configFile.exists() && configFile.lastModified() > this.lastModifiedTime){
+            try{
+                updateData();
+            }catch (IOException e){
+                System.out.println("Erro ao tentar recarregar arquivo modificado.");
+            }
+        }
+    }
+
+    public static synchronized Config getInstance(){
+        if(instance == null){
+            try {
+                instance = new Config();
+            } catch (IOException e) {
+                System.out.println("Erro ao ler arquivo" + e.getMessage());
+            }
+        }else{
+            instance.checkFileChanges();
+        }
+        return instance;
+    }
+
+    public String getServerName() {
+        return serverName;
+    }
+
+    public Integer getServerPort() {
+        return serverPort;
+    }
+
+    public String getIpAddress() {
+        return ipAddress;
+    }
+
+    public void updateData() throws IOException {
+        if(!configFile.exists()) {
+            throw new FileNotFoundException("Arquivo conf.cfg não encontrado no disco.");
+        }
+            String fileContent = Files.readString(configFile.toPath());
+
+            String[] server = fileContent.split(";");
+            if (server.length == 2) {
+                String IP = server[0].trim();
+                int port = Integer.parseInt(server[1].trim());
+
+                ipAddress = IP;
+                serverPort = port;
+                this.lastModifiedTime = configFile.lastModified();
+            }else{
+                throw new IOException("Formato de arquivo inválido." + fileContent);
+            }
+    }
 }

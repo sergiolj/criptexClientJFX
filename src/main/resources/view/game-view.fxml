@@ -9,8 +9,8 @@
     <top>
         <MenuBar fx:id="mb_main">
             <Menu mnemonicParsing="false" text="Arquivo">
-                <MenuItem mnemonicParsing="false" text="Novo jogo" />
-                <MenuItem mnemonicParsing="false" text="Sair" />
+                <MenuItem mnemonicParsing="false" text="Novo jogo" onAction="#reload"/>
+                <MenuItem mnemonicParsing="false" text="Sair" onAction="#exitApp"/>
             </Menu>
             <Menu mnemonicParsing="false" text="Ajuda">
                 <MenuItem mnemonicParsing="false" text="Regras" />

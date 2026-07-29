@@ -61,7 +61,16 @@ import java.util.Objects;
             showAlert(Alert.AlertType.ERROR, tittle,message,owner);
         }
 
-        public static void showConfirmation(String tittle, String message,Window owner) {
+        public static void showConfirmationWithoutNode(String tittle, String message) {
+            Window owner = Window.getWindows().stream()
+                    .filter(Window::isFocused)
+                    .findFirst()
+                    .orElse(null);
+            showAlert(Alert.AlertType.CONFIRMATION,tittle,message,owner);
+        }
+        public static void showConfirmation(String tittle, String message, Node node) {
+            Window owner = (node != null && node.getScene() !=null) ?
+                    node.getScene().getWindow() : null;
             showAlert(Alert.AlertType.CONFIRMATION,tittle,message,owner);
         }
 
