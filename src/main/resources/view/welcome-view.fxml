@@ -17,11 +17,20 @@
                 <MenuItem mnemonicParsing="false" text="Sobre" />
             </Menu>
         </MenuBar>
+        <!--
+        <top>
+            <HBox>
+                <ImageView fx:id="img_reload" preserveRatio="true" />
+                <ImageView fx:id="img_settings" preserveRatio="true" />
+                <ImageView fx:id="img_information" preserveRatio="true" />
+            </HBox>
+        </top>
+        -->
     </top>
     <center>
         <VBox alignment="CENTER">
             <ImageView fx:id="img_logo" preserveRatio="true" />
-            <TextField fx:id="txf_username" promptText="Nome do Jogador" alignment="CENTER">
+            <TextField fx:id="txf_username" alignment="CENTER" promptText="Nome do Jogador">
                 <VBox.margin>
                     <Insets top="80.0" />
                 </VBox.margin>
@@ -33,4 +42,5 @@
             </Button>
         </VBox>
     </center>
+
 </BorderPane>

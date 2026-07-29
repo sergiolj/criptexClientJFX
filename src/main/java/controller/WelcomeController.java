@@ -32,15 +32,15 @@ public class WelcomeController {
     @FXML
     public TextField txf_username;
     @FXML
-    public ImageView img_logo;
+    public ImageView img_logo, img_reload, img_settings, img_information;
     @FXML
     public MenuBar mb_main;
 
     @FXML
     public void initialize() {
-
         Image logo = new Image(Objects.requireNonNull(getClass()
                 .getResourceAsStream("/img/criptex_medium.png")));
+
         img_logo.setImage(logo);
         img_logo.setFitWidth(240);
 
@@ -72,5 +72,20 @@ public class WelcomeController {
                         btn_start);
             }
         });
+    }
+    private void loadIcons(){
+        Image reload = new Image(Objects.requireNonNull(getClass()
+                .getResourceAsStream("/img/reload_solid.png")));
+        Image settings = new Image(Objects.requireNonNull(getClass()
+                .getResourceAsStream("/img/settings_solid.png")));
+        Image info = new Image(Objects.requireNonNull(getClass()
+                .getResourceAsStream("/img/info_solid.png")));
+
+        img_reload.setImage(reload);
+        img_reload.setFitWidth(30);
+        img_information.setImage(info);
+        img_information.setFitWidth(30);
+        img_settings.setImage(settings);
+        img_settings.setFitWidth(30);
     }
 }
