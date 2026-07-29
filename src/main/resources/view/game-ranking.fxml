@@ -4,21 +4,22 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" xmlns="http://javafx.com/javafx/17.0.12"
+<VBox alignment="CENTER" spacing="50.0" xmlns="http://javafx.com/javafx/17.0.12"
       xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RankingController">
-      <Label text="Melhores Jogadores">
-         <VBox.margin>
-            <Insets top="20.0" />
-         </VBox.margin>
-      </Label>
-      <GridPane fx:id="gp_score" alignment="CENTER">
-         <VBox.margin>
-            <Insets bottom="20.0" top="20.0" />
-         </VBox.margin>
-      </GridPane>
-      <Button fx:id="btn_new_game" mnemonicParsing="false" text="Novo Jogo">
-         <VBox.margin>
-            <Insets bottom="20.0" />
-         </VBox.margin>
-      </Button>
+    <Label text="Melhores Jogadores">
+        <VBox.margin>
+            <Insets/>
+        </VBox.margin>
+    </Label>
+    <GridPane fx:id="gp_score" alignment="CENTER">
+        <VBox.margin>
+            <Insets/>
+        </VBox.margin>
+    </GridPane>
+    <Button fx:id="btn_new_game" mnemonicParsing="false" text="Novo Jogo">
+        <VBox.margin>
+            <Insets/>
+        </VBox.margin>
+    </Button>
 </VBox>
+

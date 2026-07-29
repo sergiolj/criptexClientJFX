@@ -58,7 +58,7 @@ public class Navigation {
 
     public static void loadWelcomeView(){
         String fxml = "/view/welcome-view.fxml";
-        String title = "Criptex - Descubra a palavra secreta.";
+        String title = "Criptex";
         double width = 300;
         double height = 450;
         try{

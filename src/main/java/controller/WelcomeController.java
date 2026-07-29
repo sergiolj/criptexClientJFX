@@ -1,6 +1,7 @@
 package controller;
 
 
+import javafx.scene.control.MenuBar;
 import model.Player;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -32,6 +33,8 @@ public class WelcomeController {
     public TextField txf_username;
     @FXML
     public ImageView img_logo;
+    @FXML
+    public MenuBar mb_main;
 
     @FXML
     public void initialize() {
@@ -39,7 +42,7 @@ public class WelcomeController {
         Image logo = new Image(Objects.requireNonNull(getClass()
                 .getResourceAsStream("/img/criptex_medium.png")));
         img_logo.setImage(logo);
-        img_logo.setFitWidth(320);
+        img_logo.setFitWidth(240);
 
         txf_username.getStyleClass().add("text_field");
         txf_username.setFocusTraversable(false);

@@ -2,6 +2,7 @@ package controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuBar;
 import javafx.scene.layout.GridPane;
 import shared.remote.Ranking;
 import ui.component.RankingPanel;

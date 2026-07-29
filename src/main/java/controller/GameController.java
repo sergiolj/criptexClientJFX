@@ -2,6 +2,7 @@ package controller;
 
 import javafx.animation.PauseTransition;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuBar;
 import javafx.util.Duration;
 import shared.remote.Ranking;
 import ui.component.Animation;
@@ -41,6 +42,8 @@ public class GameController {
     public VBox vb_keyboard;
     @FXML
     public Label lb_invalid_word, lbl_stopwatch;
+    @FXML
+    public MenuBar mb_main;
 
     private GameSession gameSession;
     private final KeyboardBuilder keyboard = new KeyboardBuilder();
