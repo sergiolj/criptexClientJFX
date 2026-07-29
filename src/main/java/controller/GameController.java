@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.animation.PauseTransition;
 import javafx.scene.control.Label;
 import javafx.util.Duration;
 import shared.remote.Ranking;
@@ -45,6 +46,8 @@ public class GameController {
     private final KeyboardBuilder keyboard = new KeyboardBuilder();
     private final WordPanel wordPanel = new WordPanel();
     private Stopwatch stopwatch;
+    private PauseTransition pauseDuration;
+    private List<Ranking> rankingList;
 
     public void setGameSession(GameSession gameSession){
         this.gameSession = gameSession;
@@ -54,6 +57,8 @@ public class GameController {
     public void initialize(){
         stopwatch = new Stopwatch(lbl_stopwatch);
         stopwatch.start();
+        lbl_stopwatch.setMinHeight(10);
+        lbl_stopwatch.setMinWidth(70);
 
         gp_word_panel.getChildren().add((wordPanel.createWordPanel()));
 
@@ -67,16 +72,10 @@ public class GameController {
     private void processCommand(String command) {
         if (command.equals("ENTER")) {
             if (gameSession.noAttemptsLeft() || gameSession.isWordMatch()) {
-                    try{
-                        GameSession gameSession = GameSession.getInstance();
-                        List<Ranking> rankingList = gameSession.getRanking();
-                        gameSession.disconnect();
-
-                        Navigation.loadGameScore(rankingList);
-                    }catch (RemoteException e){
-                        AlertWindow.showErrorWithoutNode("Erro ao desconectar jogador",
-                                "Falha ao tentar se comunicar com o servidor: " + e.getMessage());
-                    }
+                if(pauseDuration !=null && pauseDuration.getStatus() == javafx.animation.Animation.Status.RUNNING){
+                    pauseDuration.stop();
+                    waitToDisconnect(Duration.ZERO);
+                }
             }
             String guess = wordPanel.command("ENTER");
             System.out.println("Palavra retornada " + guess);
@@ -85,15 +84,18 @@ public class GameController {
                     System.out.println("Criando response");
                     GuessResponse response = gameSession.verifyGuess(guess);
                     if (response != null) {
-                        if(response.isWordMatch()){
+                        if(response.isWordMatch() || gameSession.noAttemptsLeft()){
                             stopwatch.stop();
+                            waitToDisconnect(Duration.seconds(5));
                         }
                         System.out.println("Formatando resposta no Painel");
                         wordPanel.formatResponse(response);
                     } else {
                         System.out.println("Palavra não reconhecida.");
                         wordPanel.rollBack();
+                        lbl_stopwatch.setVisible(false);
                         lb_invalid_word.setVisible(true);
+                        Animation.blink(lb_invalid_word);
                     }
                 } catch (RemoteException e) {
                     System.out.println("Erro ao enviar palpite." + e.getMessage());
@@ -101,7 +103,7 @@ public class GameController {
             }
         } else {
             lb_invalid_word.setVisible(false);
-            Animation.blink(lb_invalid_word);
+            lbl_stopwatch.setVisible(true);
             wordPanel.command(command);
         }
     }
@@ -119,5 +121,26 @@ public class GameController {
                 processCommand(keySelected);
             }
         }
+    }
+
+    private void disconnect() {
+        try{
+            GameSession gameSession = GameSession.getInstance();
+            this.rankingList = gameSession.getRanking();
+            gameSession.disconnect();
+
+        }catch (RemoteException e){
+            AlertWindow.showErrorWithoutNode("Erro ao desconectar jogador",
+                    "Falha ao tentar se comunicar com o servidor: " + e.getMessage());
+        }
+    }
+
+    private void waitToDisconnect(Duration seconds) {
+        this.pauseDuration = new PauseTransition(seconds);
+        pauseDuration.setOnFinished(event -> {
+            disconnect();
+            Navigation.loadGameScore(this.rankingList);
+        });
+        pauseDuration.play();
     }
 }

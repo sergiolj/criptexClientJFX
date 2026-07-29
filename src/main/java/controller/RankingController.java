@@ -29,7 +29,11 @@ public class RankingController {
 
     @FXML
     public void initialize(){
+        btn_new_game.getStyleClass().add("welcome");
+        btn_new_game.setMinWidth(120);
+        btn_new_game.setMaxHeight(30);
         btn_new_game.setOnAction(event ->
                 Navigation.loadWelcomeView());
+
     }
 }

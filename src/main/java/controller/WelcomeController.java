@@ -39,10 +39,11 @@ public class WelcomeController {
         Image logo = new Image(Objects.requireNonNull(getClass()
                 .getResourceAsStream("/img/criptex_medium.png")));
         img_logo.setImage(logo);
-        img_logo.setFitWidth(370);
+        img_logo.setFitWidth(320);
 
         txf_username.getStyleClass().add("text_field");
-        txf_username.setMinHeight(50);
+        txf_username.setFocusTraversable(false);
+        txf_username.setMaxWidth(200);
 
         btn_start.getStyleClass().add("welcome");
         btn_start.setMinWidth(120);
