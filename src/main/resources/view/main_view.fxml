@@ -5,16 +5,16 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GameController">
+<BorderPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.GameController">
     <top>
         <MenuBar fx:id="mb_main">
             <Menu mnemonicParsing="false" text="Arquivo">
-                <MenuItem mnemonicParsing="false" text="Novo jogo" onAction="#reload"/>
                 <MenuItem mnemonicParsing="false" text="Sair" onAction="#exitApp"/>
             </Menu>
             <Menu mnemonicParsing="false" text="Ajuda">
-                <MenuItem mnemonicParsing="false" text="Regras" />
-                <MenuItem mnemonicParsing="false" text="Sobre" />
+                <MenuItem mnemonicParsing="false" text="Regras" onAction="#rulesWindowModal"/>
+                <MenuItem mnemonicParsing="false" text="Sobre" onAction="#about" />
             </Menu>
         </MenuBar>
     </top>

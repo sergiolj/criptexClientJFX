@@ -2,6 +2,7 @@ package view.manager;
 
 import controller.GameController;
 import controller.RankingController;
+import controller.RulesController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -59,8 +60,8 @@ public class Navigation {
     public static void loadWelcomeView(){
         String fxml = "/view/welcome-view.fxml";
         String title = "Criptex";
-        double width = 300;
-        double height = 450;
+        double width = 450;
+        double height = 300;
         try{
             FXMLLoader loader = loadFXML(fxml);
 
@@ -77,7 +78,7 @@ public class Navigation {
     }
 
     public static void loadGameView(GameSession gameSession){
-        String fxml = "/view/game-view.fxml";
+        String fxml = "/view/main_view.fxml";
         String title = "Criptex";
         double width = 600;
         double height = 750;
@@ -97,7 +98,7 @@ public class Navigation {
     }
 
     public static void loadGameScore(List<Ranking> rankingList){
-        String fxml = "/view/game-ranking.fxml";
+        String fxml = "/view/ranking_view.fxml";
         String title = "Criptex Score";
         double width = 300;
         double height = 450;
@@ -114,5 +115,52 @@ public class Navigation {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+
+    public static void loadGameRules(Scene callbackScene){
+        String fxml = "/view/rules_view.fxml";
+        String title = "Criptex Score";
+        double width = 300;
+        double height = 450;
+        try{
+            FXMLLoader loader = loadFXML(fxml);
+
+            Parent root = loader.load();
+            RulesController controller = loader.getController();
+            controller.setCallbackScene(callbackScene);
+
+            setupScene(root,title,width,height);
+
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void loadGameRulesModal(){
+        String fxml = "/view/rules_view.fxml";
+        String title = "Criptex Regras";
+        double width = 300;
+        double height = 450;
+        try{
+            FXMLLoader loader = loadFXML(fxml);
+            Parent root = loader.load();
+            Stage modal = new Stage();
+            Scene scene = new Scene(root,width,height);
+            scene.getStylesheets().add(Objects.requireNonNull(
+                    Navigation.class.getResource("/styles/styles.css")).toExternalForm());
+
+            modal.setTitle(title);
+            modal.setScene(scene);
+            modal.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    public static Stage getStage() {
+        return stage;
     }
 }

@@ -5,32 +5,31 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane styleClass="my-stage"
-        xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.WelcomeController">
+<BorderPane styleClass="my-stage" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.WelcomeController">
     <top>
         <MenuBar fx:id="mb_main">
             <Menu mnemonicParsing="false" text="Arquivo">
-                <MenuItem mnemonicParsing="false" text="Config" onAction="#configServer" />
-                <MenuItem mnemonicParsing="false" text="Sair" onAction="#exitApp" />
+                <MenuItem mnemonicParsing="false" onAction="#configServer" text="Config" />
+                <MenuItem mnemonicParsing="false" onAction="#exitApp" text="Sair" />
             </Menu>
             <Menu mnemonicParsing="false" text="Ajuda">
-                <MenuItem mnemonicParsing="false" text="Regras" />
-                <MenuItem mnemonicParsing="false" text="Sobre" />
+                <MenuItem mnemonicParsing="false" text="Regras" onAction="#rulesWindowModal"/>
+                <MenuItem mnemonicParsing="false" text="Sobre" onAction="#about"/>
             </Menu>
         </MenuBar>
     </top>
     <center>
-        <VBox alignment="CENTER">
-            <ImageView fx:id="img_logo" preserveRatio="true" />
+        <VBox alignment="CENTER" spacing="10.0">
+            <ImageView fx:id="img_logo" preserveRatio="true">
+            <VBox.margin>
+               <Insets top="40.0" />
+            </VBox.margin></ImageView>
             <TextField fx:id="txf_username" alignment="CENTER" promptText="Nome do Jogador">
                 <VBox.margin>
-                    <Insets top="80.0" />
+                    <Insets top="30.0" />
                 </VBox.margin>
             </TextField>
             <Button fx:id="btn_start" text="Jogar">
-                <VBox.margin>
-                    <Insets top="10.0" />
-                </VBox.margin>
             </Button>
         </VBox>
     </center>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" spacing="10.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RulesController">
+    <Label styleClass="rules_h1" text="BEM-VINDO AO CRIPTEX RMI" />
+    <Label prefWidth="200.0" styleClass="rules_p" text="Sua missão é decifrar a palavra secreta de 5 letras antes que o mecanismo se auto-destrua, para isso você tem seis tentativas. " textAlignment="CENTER" wrapText="true" />
+    <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="200.0" styleClass="rules_p" text="A cada tentativa, o Criptex responderá com pistas:" textAlignment="CENTER" wrapText="true" />
+    <VBox alignment="CENTER" spacing="10">
+          <StackPane maxHeight="60.0" prefHeight="60" maxWidth="200.0" styleClass="right">
+            <Label maxWidth="150.0" text="A letra faz parte da palavra e está na posição correta." textAlignment="JUSTIFY" wrapText="true" />
+        </StackPane>
+        <StackPane maxHeight="60.0" prefHeight="60" maxWidth="200.0" styleClass="wrong_place" GridPane.rowIndex="1">
+            <Label maxWidth="150.0" text="A letra faz parte da palavra, mas está na posição errada." textAlignment="JUSTIFY" wrapText="true" GridPane.rowIndex="1" />
+        </StackPane>
+        <StackPane maxHeight="60.0" prefHeight="60" maxWidth="200.0" styleClass="non_existent" GridPane.rowIndex="2">
+            <Label maxWidth="150.0" text="A letra não faz parte da palavra." textAlignment="JUSTIFY" wrapText="true" GridPane.rowIndex="2" />
+        </StackPane>
+    </VBox>
+    <Button fx:id="btn_Ok" styleClass="welcome" text="Ok">
+      <VBox.margin>
+         <Insets top="10.0" />
+      </VBox.margin></Button>
+</VBox>

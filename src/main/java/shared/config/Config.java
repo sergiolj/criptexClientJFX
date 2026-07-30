@@ -36,7 +36,7 @@ public class Config {
 
     private Config() throws IOException{
         if(!configFile.exists()){
-            saveConfigToDisk("127.0.0.0", 1099);
+            saveConfigToDisk("127.0.0.1", 1099);
         }
             updateData();
     }

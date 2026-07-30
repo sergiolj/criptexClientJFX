@@ -87,7 +87,7 @@ import java.util.Objects;
          */
         public static void about() {
             Stage dialogStage = new Stage();
-            dialogStage.setTitle("About Runner");
+            dialogStage.setTitle("Sobre o Criptex");
 
             //Uma janela modal é uma janela que bloqueia a janela atrás dela.
             dialogStage.initModality(Modality.APPLICATION_MODAL);
@@ -97,10 +97,14 @@ import java.util.Objects;
             vbox.setSpacing(10);
             vbox.setPadding(new Insets(20));
 
-            Label title = new Label("Runner Application");
+            Label title = new Label("Jogo Criptex");
             title.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
-            Label description = new Label("Este é um app inventado pelo autor para" +
-                    "\n explorar os conceitos e aplicações de Java FX\"");
+            Label description = new Label("Este é uma versão do jogo Wordle \n" +
+                    "desenvolvido por Sérgio Lopes Júnior para" +
+                    "\n explorar os conceitos e aplicações de Java FX." +
+                    "\n Desenvolvido como complemento client GUI para o servidor utilizando a tecnologia " +
+                    "\nJava RMI Remote Method Invocation como atividade \n" +
+                    "acadêmica da disciplina de Sistemas Distribuídos.");
             description.setTextAlignment(TextAlignment.CENTER);
 
             Button exit = new Button("Close");

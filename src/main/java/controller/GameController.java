@@ -2,6 +2,7 @@ package controller;
 
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.util.Duration;
@@ -148,13 +149,21 @@ public class GameController {
         pauseDuration.play();
     }
 
-    public void exitApp(ActionEvent actionEvent) {
+    public void exitApp() {
         disconnect();
         System.exit(0);
     }
 
-    public void reload(ActionEvent actionEvent) {
+    public void reload() {
         disconnect();
         Navigation.loadWelcomeView();
+    }
+
+    public void rulesWindowModal(){
+        Navigation.loadGameRulesModal();
+    }
+
+    public void about(){
+        AlertWindow.about();
     }
 }

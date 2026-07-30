@@ -2,7 +2,10 @@ package controller;
 
 
 import javafx.event.ActionEvent;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.TextFormatter;
 import model.Player;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -50,6 +53,11 @@ public class WelcomeController {
         txf_username.getStyleClass().add("text_field");
         txf_username.setFocusTraversable(false);
         txf_username.setMaxWidth(200);
+        txf_username.setTextFormatter(new TextFormatter<>(change -> {
+            change.setText(change.getText().toUpperCase());
+            return change;
+        }));
+
 
         btn_start.getStyleClass().add("welcome");
         btn_start.setMinWidth(120);
@@ -100,6 +108,9 @@ public class WelcomeController {
     public void exitApp(ActionEvent actionEvent) {
         System.exit(0);
     }
+    public void about(){
+        AlertWindow.about();
+    }
 
     public void configServer(ActionEvent actionEvent) {
         AlertWindow.showConfirmationWithoutNode("Configuração do Servidor RMI",
@@ -108,4 +119,8 @@ public class WelcomeController {
                         "\nPorta: " + Config.getInstance().getServerPort());
 
     }
+    public void rulesWindowModal(){
+        Navigation.loadGameRulesModal();
+    }
+
 }
