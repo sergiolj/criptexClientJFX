@@ -99,12 +99,14 @@ import java.util.Objects;
 
             Label title = new Label("Jogo Criptex");
             title.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
-            Label description = new Label("Este é uma versão do jogo Wordle \n" +
-                    "desenvolvido por Sérgio Lopes Júnior para" +
-                    "\n explorar os conceitos e aplicações de Java FX." +
-                    "\n Desenvolvido como complemento client GUI para o servidor utilizando a tecnologia " +
-                    "\nJava RMI Remote Method Invocation como atividade \n" +
-                    "acadêmica da disciplina de Sistemas Distribuídos.");
+            Label description = new Label("Este é uma versão do jogo Wordle " +
+                    "\n desenvolvido por Sérgio Lopes Júnior (github.com/sergiolj) para" +
+                    "\n explorar os conceitos e aplicações do Java FX." +
+                    "\n Desenvolvido como client GUI para um servidor criado inicialmente apenas" +
+                    "\n para funcionar em CLI. " +
+                    "\nO servidor de palavras utiliza a tecnologia Java RMI Remote Method Invocation" +
+                    "\n e foi desenvolvido como atividade acadêmica da disciplina de Sistemas Distribuídos," +
+                    "\n semestre 01/2026 do curso de Engenharia de Software da Universidade Católica do Salvador.");
             description.setTextAlignment(TextAlignment.CENTER);
 
             Button exit = new Button("Close");
