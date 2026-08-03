@@ -153,6 +153,7 @@ public class Navigation {
 
             modal.setTitle(title);
             modal.setScene(scene);
+            modal.setResizable(false);
             modal.show();
         } catch (IOException e) {
             throw new RuntimeException(e);
