@@ -219,5 +219,4 @@ precisar reiniciar o jogo. O menu **Ajuda** mostra o servidor, IP e porta em uso
 
 ## Autoria
 
-Sérgio Lopes Júnior, com Bruna Brito Muniz Filgueiras e Laís de Assis Doria da Silva (servidor e
-configuração compartilhada).
+Sérgio Lopes Júnior.
